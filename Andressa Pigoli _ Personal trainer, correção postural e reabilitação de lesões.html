@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Andressa Pigoli | Personal trainer, correção postural e reabilitação de lesões</title>
+<meta name="description" content="Fortaleça seu corpo, alivie a dor e melhore sua postura. Treino personalizado com Andressa Pigoli, pós-graduada em Correção Postural e Reabilitação de Lesões.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Jost:wght@300;400;500&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1615;--ink2:#262120;--nude:#e8c9b0;--nude2:#d9ad8f;--cream:#f4eee6;--paper:#faf7f2;--muted:#6f6560;--line:#ddd3c8;
+--serif:'Libre Baskerville',Georgia,serif;--sans:'Jost',system-ui,sans-serif;--script:'Caveat',cursive;
+--hero-img:none;--rehab-img:none;--about-img:none;--cta-img:none;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px));height:100%}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:400;line-height:1.6;min-height:100%}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.2;margin:0}
+p{margin:0}a{color:inherit;text-decoration:none}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--nude);color:var(--ink);padding:14px 28px;border-radius:999px;font-size:.82rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;transition:background .2s,transform .2s;border:0;cursor:pointer}
+.btn:hover{background:var(--nude2);transform:translateY(-2px)}
+.btn svg{width:18px;height:18px}
+.script{font-family:var(--script);font-size:1.5rem;line-height:1.25}
+:focus-visible{outline:2px solid var(--nude2);outline-offset:3px}
+svg.i{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(26,22,21,.96);backdrop-filter:blur(8px);color:#fff;padding-top:env(safe-area-inset-top,0px)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;gap:20px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo b{font-family:var(--serif);font-size:1.7rem;font-weight:400;border:1px solid var(--nude);padding:0 8px;line-height:1.3;color:var(--nude)}
+.logo span{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;line-height:1.3}
+.logo small{display:block;font-size:.55rem;letter-spacing:.35em;color:var(--nude)}
+nav{display:flex;gap:28px;font-size:.85rem}
+nav a{opacity:.85}nav a:hover{opacity:1;color:var(--nude)}
+header .btn{padding:10px 20px;font-size:.72rem}
+.menu{display:none;background:none;border:1px solid rgba(255,255,255,.3);border-radius:10px;width:44px;height:44px;cursor:pointer;color:#fff;place-items:center}
+.menu span{display:block;width:20px;height:2px;background:currentColor;position:relative;transition:background .2s}
+.menu span::before,.menu span::after{content:"";position:absolute;left:0;width:20px;height:2px;background:currentColor;transition:transform .25s}
+.menu span::before{top:-6px}.menu span::after{top:6px}
+header.open .menu span{background:transparent}header.open .menu span::before{transform:translateY(6px) rotate(45deg)}header.open .menu span::after{transform:translateY(-6px) rotate(-45deg)}
+@media(max-width:900px){.menu{display:grid}
+nav{position:absolute;left:0;right:0;top:100%;background:var(--ink);flex-direction:column;gap:0;padding:8px 24px 20px;border-top:1px solid rgba(255,255,255,.1);max-height:0;overflow:hidden;visibility:hidden;opacity:0;transition:opacity .25s,max-height .35s,visibility .25s}
+header.open nav{max-height:420px;visibility:visible;opacity:1}
+nav a{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:1rem}
+header .wrap{justify-content:flex-start}header .wrap .btn{margin-left:auto}}
+@media(max-width:900px) and (min-width:421px){header .btn{display:none}}@media(max-width:420px){header .btn{display:none}.logo span{font-size:.64rem}header .wrap{justify-content:space-between}}
+/* hero */
+.hero{position:relative;background:var(--ink) var(--hero-img) center right/cover;color:#fff;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 80% 40%,#4a3a33 0,transparent 55%),linear-gradient(100deg,var(--ink) 35%,#2b2321 100%);z-index:0}
+.hero.has-img::before{background:linear-gradient(100deg,rgba(26,22,21,.92) 30%,rgba(26,22,21,.2))}
+.hero .wrap{position:relative;z-index:1;padding-top:84px;padding-bottom:40px;min-height:520px}
+.cred{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(232,201,176,.45);color:var(--nude);padding:8px 16px;border-radius:999px;font-size:.78rem;margin-bottom:24px;max-width:100%}.cred svg{width:20px;height:20px;flex:none}
+.eyebrow{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--nude);margin-bottom:20px}
+.hero h1{font-size:clamp(2rem,4.6vw,3.3rem);max-width:560px;margin-bottom:22px}
+.hero p.lead{max-width:470px;font-weight:300;font-size:1.05rem;opacity:.9;margin-bottom:32px}
+.hero .quote{position:absolute;right:48px;top:90px;transform:rotate(-6deg);color:var(--nude);text-align:left;font-size:2rem}
+.hero .quote::after{content:"";display:block;height:2px;background:var(--nude);width:80%;margin-top:6px;margin-left:auto;border-radius:2px}
+.badges{display:flex;flex-wrap:wrap;gap:0;margin-top:56px}
+.badges div{display:flex;align-items:center;gap:12px;font-size:.78rem;line-height:1.3;padding:0 24px;border-left:1px solid rgba(255,255,255,.2);color:#ddd}
+.badges div:first-child{border:0;padding-left:0}
+.badges svg{color:var(--nude);flex:none}
+@media(max-width:760px){.hero .quote{display:none}.badges{gap:18px 0}.badges div{width:50%;padding:0 8px 0 0;border:0}.hero .wrap{padding-top:56px}}
+/* services */
+section{padding:72px 0}
+.services{background:var(--cream)}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:44px}
+.sec-head h2{font-size:1.9rem}.sec-head p{color:var(--muted);max-width:420px;margin-top:6px}
+.sec-head .tag{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
+.svc{padding:0 22px;border-left:1px solid var(--line)}
+.svc:first-child{border:0;padding-left:0}
+.ico{width:60px;height:60px;border-radius:50%;background:var(--nude);display:grid;place-items:center;margin-bottom:20px;color:var(--ink)}
+.svc h3{font-size:1.02rem;margin-bottom:10px}.svc p{font-size:.88rem;color:var(--muted)}
+@media(max-width:980px){.grid5{grid-template-columns:repeat(2,1fr);gap:36px 0}.svc:nth-child(odd){border:0;padding-left:0}.svc:first-child{padding-left:0}}
+@media(max-width:520px){.grid5{grid-template-columns:1fr}.svc{border:0!important;padding:0!important}}
+/* rehab */
+.rehab{background:var(--ink2);color:#fff;padding:0}
+.rehab .row{display:grid;grid-template-columns:1fr 1.25fr 1fr;min-height:340px}
+.rehab .photo{background:linear-gradient(160deg,#3a2f2b,#15110f) var(--rehab-img) center/cover;position:relative}
+.rehab .photo::after{content:"AP";position:absolute;inset:0;display:grid;place-items:center;font-family:var(--serif);font-size:4rem;color:rgba(232,201,176,.12)}
+.rehab .photo.has-img::after{display:none}
+.rehab .txt{padding:56px 40px}
+.rehab h2{font-size:2rem;margin-bottom:18px}
+.rehab .txt p{font-weight:300;opacity:.88;margin-bottom:26px;max-width:420px}
+.rehab ul{list-style:none;margin:0;padding:48px 40px 48px 40px;border-left:1px solid rgba(255,255,255,.18);display:flex;flex-direction:column;justify-content:center}
+.rehab li{display:flex;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.15);font-size:.9rem}
+.rehab li svg{color:var(--nude);flex:none}
+.rehab .script{color:var(--nude);margin-top:20px}
+@media(max-width:980px){.rehab .row{grid-template-columns:1fr}.rehab .photo{min-height:220px}.rehab ul{border:0;border-top:1px solid rgba(255,255,255,.18)}.rehab .txt{padding:40px 24px}.rehab ul{padding:32px 24px}}
+/* how */
+.how{background:var(--paper)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr) 1fr;gap:28px;align-items:start}
+.step{position:relative}
+.step .n{width:40px;height:40px;border-radius:50%;background:var(--nude);display:grid;place-items:center;font-family:var(--serif);margin-bottom:16px}
+.step p{font-size:.88rem;color:var(--muted);max-width:230px}
+.focus{border-left:1px solid var(--line);padding-left:28px;text-align:center;color:var(--nude2)}
+.focus p{color:var(--ink);font-size:.95rem;margin-top:10px}
+@media(max-width:980px){.steps{grid-template-columns:repeat(2,1fr)}.focus{grid-column:1/-1;border:0;padding:0}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+/* about + testimonials */
+.about{background:#fff}
+.two{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:44px;align-items:center}
+.about h2{font-size:1.7rem;margin-bottom:16px}
+.about p{color:var(--muted);font-size:.95rem;margin-bottom:14px}
+.about .script{color:var(--ink);margin:18px 0 22px}
+.btn.dark{background:var(--nude)}
+.pic{aspect-ratio:1/1.1;border-radius:4px;background:linear-gradient(150deg,#3b302b,#14100e) var(--about-img) center/cover;display:grid;place-items:center;color:rgba(232,201,176,.35);font-family:var(--serif);font-size:3.4rem;border-left:8px solid var(--nude2)}
+.pic.has-img{color:transparent}
+.testi h2{font-size:1.7rem;margin-bottom:6px}
+.card{background:var(--cream);padding:30px;margin-top:22px;min-height:200px;position:relative}
+.card q{display:block;quotes:none;font-size:.98rem;margin-bottom:22px}
+.card q::before{content:"“";display:block;font-family:var(--serif);font-size:2.4rem;line-height:.6;color:var(--nude2)}
+.who{display:flex;align-items:center;gap:12px;font-size:.85rem}
+.who i{width:42px;height:42px;border-radius:50%;background:var(--nude);display:grid;place-items:center;font-style:normal;font-family:var(--serif)}
+.who small{display:block;color:var(--muted)}
+.ctrl{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
+.ctrl button{background:none;border:1px solid var(--line);border-radius:50%;width:38px;height:38px;cursor:pointer;font-size:1.1rem;color:var(--ink)}
+.ctrl button:hover{background:var(--nude)}
+.dots{display:flex;gap:7px}.dots span{width:7px;height:7px;border-radius:50%;background:var(--line)}.dots span.on{background:var(--ink)}
+@media(max-width:980px){.two{grid-template-columns:1fr}.pic{max-width:420px}}
+/* cta + faq */
+.last{padding:0;background:var(--cream)}
+.last .row{display:grid;grid-template-columns:1fr 1.3fr 1fr}
+.cta{background:linear-gradient(140deg,#3b302b,#15110f) var(--cta-img) center/cover;color:#fff;padding:56px 36px;display:flex;flex-direction:column;justify-content:center;gap:22px}
+.cta h2{font-size:1.5rem}.cta p{font-weight:300;font-size:.9rem;opacity:.85}
+.faq{padding:48px 40px;background:var(--paper)}
+.faq h2{font-size:1.3rem;margin-bottom:16px}
+details{border-bottom:1px solid var(--line);padding:12px 0;font-size:.9rem}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--muted)}
+details[open] summary::after{content:"–"}
+details p{margin-top:10px;color:var(--muted);font-weight:300}
+.pillars{padding:48px 36px;display:flex;flex-direction:column;gap:22px;justify-content:center;border-left:1px solid var(--line)}
+.pillars div{display:flex;align-items:center;gap:16px;font-size:.85rem;color:var(--muted);line-height:1.35}
+.pillars svg{color:var(--ink);flex:none}
+.pillars .script{color:var(--ink);text-align:right}
+@media(max-width:980px){.last .row{grid-template-columns:1fr}.pillars{border:0}.faq,.cta,.pillars{padding:40px 24px}}
+/* footer */
+footer{background:var(--ink);color:#fff;padding:32px 0}
+footer .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+footer .soc{display:flex;gap:18px}footer .soc a{opacity:.85}footer .soc a:hover{color:var(--nude)}
+footer .links{display:flex;gap:20px;font-size:.78rem;flex-wrap:wrap}
+footer .end{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;max-width:200px;opacity:.7}
+.fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:60;width:58px;height:58px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.fab svg{width:30px;height:30px;fill:#fff}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* ===== animações e refinamentos ===== */
+.prog{position:absolute;left:0;bottom:0;height:3px;width:100%;background:linear-gradient(90deg,var(--nude2),var(--nude));transform:scaleX(0);transform-origin:left}
+header{transition:box-shadow .3s}header .wrap{transition:height .3s}
+header.sc{box-shadow:0 8px 30px rgba(0,0,0,.35)}header.sc .wrap{height:60px}
+.btn{position:relative;overflow:hidden;justify-content:center;text-align:center;white-space:normal;box-shadow:0 6px 18px rgba(217,173,143,.25)}
+.btn::after{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);transition:left .6s}
+.btn:hover::after{left:130%}
+.hero::before{background-size:140% 140%;animation:glow 14s ease-in-out infinite alternate}
+@keyframes glow{from{background-position:0 0}to{background-position:100% 30%}}
+@keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.hero .wrap>*{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+.hero .wrap>:nth-child(1){animation-delay:.1s}.hero .wrap>:nth-child(2){animation-delay:.25s}.hero .wrap>:nth-child(3){animation-delay:.4s}.hero .wrap>:nth-child(4){animation-delay:.55s}
+.hero .wrap>.quote{animation:quoteIn 1.2s .9s both}
+@keyframes quoteIn{from{opacity:0;transform:rotate(-6deg) translateX(30px)}to{opacity:1;transform:rotate(-6deg)}}
+.hero .quote::after{transform-origin:left;animation:grow 1s 1.6s both}
+.badges div{animation:rise .8s both}.badges div:nth-child(1){animation-delay:.8s}.badges div:nth-child(2){animation-delay:.95s}.badges div:nth-child(3){animation-delay:1.1s}.badges div:nth-child(4){animation-delay:1.25s}
+.js .rv{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+.js .rv-l{transform:translateX(-36px)}.js .rv-r{transform:translateX(36px)}
+.ico{transition:transform .35s,background .35s}
+.svc:hover .ico{transform:translateY(-6px) scale(1.06);background:var(--nude2)}
+.svc{transition:transform .3s}
+.rehab li{transition:transform .3s,color .3s}.rehab li:hover{transform:translateX(8px);color:var(--nude)}
+.rehab .photo{transition:transform 1.2s}.rehab .row:hover .photo{background-size:108%}
+.step .n{transition:transform .3s,background .3s}.step:hover .n{transform:scale(1.12);background:var(--nude2)}
+.focus svg{animation:beat 2.4s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.18)}30%{transform:scale(1)}45%{transform:scale(1.12)}}
+.pic{transition:transform .5s,box-shadow .5s;box-shadow:0 20px 50px rgba(26,22,21,.18)}.pic:hover{transform:translateY(-6px)}
+.card{transition:opacity .35s,transform .35s;box-shadow:0 10px 30px rgba(26,22,21,.06)}.card.out{opacity:0;transform:translateX(-14px)}
+details{transition:background .3s}details[open]{background:rgba(232,201,176,.12)}
+details p{animation:rise .4s both}
+.fab::before{content:"";position:absolute;inset:0;border-radius:50%;background:#25d366;animation:ping 2.4s ease-out infinite;z-index:-1}
+@keyframes ping{0%{transform:scale(1);opacity:.55}100%{transform:scale(1.7);opacity:0}}
+.fab{transition:transform .25s}.fab:hover{transform:scale(1.08)}
+@media(min-width:981px){.step:nth-child(-n+3)::after{content:"";position:absolute;top:20px;left:54px;right:14px;height:1px;background:var(--nude2);transform:scaleX(0);transform-origin:left;transition:transform 1.1s .5s}.step.in:nth-child(-n+3)::after{transform:scaleX(1)}}
+/* ===== responsivo ===== */
+img,svg{max-width:100%}
+.hero h1{font-size:clamp(1.9rem,5.2vw,3.4rem)}
+.rehab h2,.sec-head h2{font-size:clamp(1.55rem,3.6vw,2.1rem)}
+@media(max-width:980px){.hero .wrap{min-height:0;padding-bottom:48px}.sec-head{margin-bottom:32px}.testi{max-width:640px}}
+@media(max-width:760px){section{padding:56px 0}.wrap{padding:0 20px}.hero .wrap{padding-top:48px}.hero p.lead{font-size:1rem}.about p{font-size:.95rem}footer .wrap{flex-direction:column;text-align:center}footer .links{justify-content:center}footer .end{max-width:none}.pillars .script{text-align:left}.badges{margin-top:40px}}
+@media(max-width:520px){.hero .btn,.cta .btn,.rehab .btn,.about .btn{width:100%}.cred{border-radius:16px;font-size:.74rem}.rehab .txt,.rehab ul,.faq,.cta,.pillars{padding-left:20px;padding-right:20px}.card{padding:22px}.rehab .script,.about .script{font-size:1.3rem}.fab{width:52px;height:52px}}
+@media(min-width:1500px){.wrap{max-width:1260px}}
+@media(prefers-reduced-motion:reduce){.hero .wrap>*,.badges div,.hero::before,.focus svg,.fab::before,.hero .quote::after{animation:none!important}.js .rv{opacity:1!important;transform:none!important}}
+</style>
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.800 14.200c-.2.700-1.400 1.300-1.900 1.300-.5.100-1.100.100-1.800-.1-2.700-.9-4.500-3.700-4.600-3.900-.1-.2-1.100-1.500-1.100-2.800s.7-2 1-2.300c.2-.3.500-.3.700-.3h.5c.2 0 .4 0 .6.500l.8 1.900c.1.200.1.300 0 .5l-.3.500-.4.400c-.1.200-.3.300-.1.600.2.300.8 1.300 1.700 2.100 1.200 1 2.100 1.300 2.400 1.500.3.100.5.100.6-.1l.9-1c.2-.3.400-.2.700-.1l1.800.9c.3.100.5.200.5.300.1.200.1.800-.1 1.500Z"/></symbol>
+</defs></svg>
+
+<header>
+<div class="wrap">
+<a class="logo" href="#inicio" aria-label="Andressa Pigoli Personal"><b>AP</b><span>Andressa Pigoli<small>PERSONAL</small></span></a>
+<nav aria-label="Principal"><a href="#inicio">Início</a><a href="#sobre">Sobre</a><a href="#servicos">Serviços</a><a href="#depoimentos">Depoimentos</a><a href="#faq">FAQ</a><a href="#contato">Contato</a></nav>
+<a class="btn wpp" href="#"><svg><use href="#wa"/></svg>Falar comigo</a>
+<button class="menu" aria-label="Abrir menu" aria-expanded="false"><span></span></button>
+</div>
+<div class="prog" aria-hidden="true"></div>
+</header>
+
+<main>
+<section class="hero" id="inicio" style="padding:0">
+<div class="wrap">
+<div class="cred"><svg class="i" viewBox="0 0 24 24"><path d="M3 9l9-5 9 5-9 5zM7 11.500V16c0 1.500 2.200 3 5 3s5-1.500 5-3v-4.500"/></svg>Pós-graduada em Correção Postural e Reabilitação de Lesões</div>
+<h1>Fortaleça seu corpo, alivie a dor e melhore sua postura.</h1>
+<p class="lead">Sou Andressa Pigoli, personal trainer e coach. Treinos individualizados, com técnica e segurança, para você evoluir sem se lesionar e se movimentar melhor todos os dias.</p>
+<a class="btn wpp" href="#"><svg><use href="#wa"/></svg>Agende seu treino personalizado</a>
+<div class="quote script">Fortalecer<br>também é<br>se cuidar.</div>
+<div class="badges">
+<div><svg class="i" viewBox="0 0 24 24"><path d="M6 8v8M18 8v8M3 10v4M21 10v4M6 12h12"/></svg>Treino<br>personalizado</div>
+<div><svg class="i" viewBox="0 0 24 24"><path d="M12 3v6l-3 3 3 3v6M12 9l3 3"/></svg>Reabilitação<br>de lesões</div>
+<div><svg class="i" viewBox="0 0 24 24"><path d="M12 3v18M9 5h6M8 9h8M9 13h6M10 17h4"/></svg>Correção<br>postural</div>
+<div><svg class="i" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.500 8-8 9-4.500-1-8-4-8-9V6z"/></svg>Suporte via app<br>e WhatsApp</div>
+</div>
+</div>
+</section>
+
+<section class="services" id="servicos">
+<div class="wrap">
+<div class="sec-head"><div><h2>Como posso te ajudar</h2><p>Um acompanhamento completo de treino, postura e reabilitação, com foco na sua evolução e segurança.</p></div><div class="tag">Treinamento + Reabilitação = Movimento livre</div></div>
+<div class="grid5">
+<div class="svc"><div class="ico"><svg class="i" viewBox="0 0 24 24"><path d="M6 8v8M18 8v8M3 10v4M21 10v4M6 12h12"/></svg></div><h3>Treino personalizado</h3><p>Planos sob medida para seus objetivos, nível e rotina.</p></div>
+<div class="svc"><div class="ico"><svg class="i" viewBox="0 0 24 24"><path d="M12 3v6l-3 3 3 3v6M12 9l3 3"/></svg></div><h3>Reabilitação de lesões</h3><p>Tratamento e adaptação de exercícios para você voltar a se movimentar com segurança.</p></div>
+<div class="svc"><div class="ico"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.500 8-8 9-4.500-1-8-4-8-9V6z"/></svg></div><h3>Prevenção de lesões</h3><p>Fortaleça pontos estratégicos e evite novos problemas.</p></div>
+<div class="svc"><div class="ico"><svg class="i" viewBox="0 0 24 24"><path d="M12 3v18M9 5h6M8 9h8M9 13h6M10 17h4"/></svg></div><h3>Correção postural e mobilidade</h3><p>Exercícios para corrigir a postura, reduzir dores e ganhar estabilidade no dia a dia.</p></div>
+<div class="svc"><div class="ico"><svg class="i" viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></div><h3>Acompanhamento próximo</h3><p>Suporte, ajustes e orientações contínuas pelo app e pelo WhatsApp.</p></div>
+</div>
+</div>
+</section>
+
+<section class="rehab">
+<div class="row">
+<div class="photo" role="img" aria-label="Foto de treino de reabilitação"></div>
+<div class="txt">
+<div class="eyebrow">Reabilitação de lesão</div>
+<h2>Volte a fazer o que você ama, sem dor.</h2>
+<p>Cada lesão é única e exige um plano individualizado. Na reabilitação, unimos conhecimento técnico, progressão segura e acompanhamento próximo para você recuperar sua força, mobilidade e confiança no movimento.</p>
+<a class="btn wpp" href="#">Saiba mais</a>
+</div>
+<ul>
+<li><svg class="i" viewBox="0 0 24 24"><path d="M5 4h14v16H5zM9 8h6M9 12h6M9 16h3"/></svg>Avaliação do quadro e histórico</li>
+<li><svg class="i" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.500 8-8 9-4.500-1-8-4-8-9V6z"/></svg>Plano de exercícios específico para sua lesão</li>
+<li><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg>Progressão segura e monitorada</li>
+<li><svg class="i" viewBox="0 0 24 24"><path d="M12 21c5-4 8-7.500 8-11a8 8 0 0 0-16 0c0 3.500 3 7 8 11z"/></svg>Orientações para o dia a dia e retorno às atividades</li>
+<div class="script">Seu corpo tem capacidade de se recuperar. E eu te ajudo nesse processo.</div>
+</ul>
+</div>
+</section>
+
+<section class="how">
+<div class="wrap">
+<div class="sec-head"><div><h2>Como funciona?</h2><p>Tudo de forma simples, prática e personalizada.</p></div></div>
+<div class="steps">
+<div class="step"><div class="n">1</div><p>Você entra em contato pelo WhatsApp e conta seus objetivos e necessidades.</p></div>
+<div class="step"><div class="n">2</div><p>Faço uma avaliação e monto seu plano personalizado.</p></div>
+<div class="step"><div class="n">3</div><p>Você recebe seu treino, com orientações e suporte contínuo.</p></div>
+<div class="step"><div class="n">4</div><p>Acompanhamos sua evolução e ajustamos o que for preciso.</p></div>
+<div class="focus"><svg class="i" viewBox="0 0 24 24"><path d="M12 20s-8-5-8-11a4.500 4.500 0 0 1 8-2.500A4.500 4.500 0 0 1 20 9c0 6-8 11-8 11z"/></svg><p>Seu objetivo é o meu foco.</p></div>
+</div>
+</div>
+</section>
+
+<section class="about" id="sobre">
+<div class="wrap two">
+<div>
+<h2>Quem vai cuidar do seu treino</h2>
+<p>Sou Andressa Pigoli, personal trainer e coach, pós-graduada em Correção Postural e Reabilitação de Lesões. Acredito que o movimento é uma ferramenta poderosa para transformar o corpo, a mente e a vida.</p>
+<p>Meu trabalho é te guiar com responsabilidade, conhecimento técnico e motivação, sempre respeitando o seu ritmo e o seu momento.</p>
+<div class="script">Juntos, vamos mais longe!</div>
+<a class="btn wpp" href="#">Agende seu treino</a>
+</div>
+<div class="pic" role="img" aria-label="Foto da Andressa Pigoli">AP</div>
+<div class="testi" id="depoimentos">
+<h2>Depoimentos</h2>
+<p style="color:var(--muted);font-size:.9rem">Resultados reais de quem confia no meu trabalho.</p>
+<div class="card" aria-live="polite"><q id="tq"></q><div class="who"><i id="ti"></i><div><b id="tn"></b><small id="tr"></small></div></div></div>
+<div class="ctrl"><button id="prev" aria-label="Anterior">‹</button><div class="dots" id="dots"></div><button id="next" aria-label="Próximo">›</button></div>
+</div>
+</div>
+</section>
+
+<section class="last" id="contato">
+<div class="row">
+<div class="cta">
+<h2>Você não precisa sentir dor para treinar. E nem treinar para se recuperar.</h2>
+<p>Vamos encontrar o melhor caminho para os seus objetivos.</p>
+<div><a class="btn wpp" href="#"><svg><use href="#wa"/></svg>Agende seu treino personalizado</a></div>
+</div>
+<div class="faq" id="faq">
+<h2>Perguntas frequentes</h2>
+<details><summary>Como agendar meu treino?</summary><p>É só clicar no botão e chamar no WhatsApp. Conversamos sobre seus objetivos e combinamos os próximos passos.</p></details>
+<details><summary>O plano é individualizado?</summary><p>Sim. Cada plano é montado a partir dos seus objetivos, nível, rotina e histórico.</p></details>
+<details><summary>Como funciona o acompanhamento?</summary><p>Você recebe seu treino com orientações e eu acompanho sua evolução, ajustando o que for preciso.</p></details>
+<details><summary>Posso fazer mesmo com uma lesão?</summary><p>Pode. Faço a avaliação do quadro e adapto os exercícios para você treinar com segurança.</p></details>
+<details><summary>Qual o valor da consultoria?</summary><p>O valor depende do plano escolhido. Chame no WhatsApp para receber as opções.</p></details>
+</div>
+<div class="pillars">
+<div><svg class="i" viewBox="0 0 24 24"><path d="M2 9a15 15 0 0 1 20 0M5 13a10 10 0 0 1 14 0M8.500 16.500a5 5 0 0 1 7 0M12 20h.01"/></svg>Treino individualizado, do seu jeito</div>
+<div><svg class="i" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.500 8-8 9-4.500-1-8-4-8-9V6z"/></svg>Mais segurança para o seu treino</div>
+<div><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 4-7 8-7s7 2 8 7"/></svg>Para todos os níveis e objetivos</div>
+<div class="script" style="display:block">Seu bem-estar é prioridade!</div>
+</div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="wrap">
+<a class="logo" href="#inicio"><b>AP</b><span>Andressa Pigoli<small>PERSONAL</small></span></a>
+<div class="soc"><a href="https://www.instagram.com/andressapigoli.personal" aria-label="Instagram"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.500 6.500h.01"/></svg></a><a class="wpp" href="#" aria-label="WhatsApp"><svg class="i" viewBox="0 0 24 24"><use href="#wa"/></svg></a></div>
+<div class="links"><a href="#inicio">Início</a><a href="#sobre">Sobre</a><a href="#servicos">Serviços</a><a href="#depoimentos">Depoimentos</a><a href="#faq">FAQ</a><a href="#contato">Contato</a></div>
+<div class="end">Movimento é vida. E eu estou aqui para te ajudar.</div>
+</div>
+</footer>
+<a class="fab wpp" href="#" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24"><use href="#wa"/></svg></a>
+
+<script>
+// Troque pelo número real (DDD + número, só dígitos)
+var WHATSAPP="556992903002",MSG="Olá, Andressa! Vim pelo seu Instagram e quero saber mais sobre a consultoria.";
+document.querySelectorAll(".wpp").forEach(function(a){a.href="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(MSG);a.target="_blank";a.rel="noopener"});
+// Para usar fotos reais, preencha as variáveis (data URI) e adicione a classe has-img ao elemento: --hero-img, --rehab-img, --about-img, --cta-img
+var T=[["A reabilitação da minha lesão, o acompanhamento e a atenção da Andressa foram essenciais para eu voltar a treinar sem dor. Hoje me sinto mais forte e confiante!","Juliana S.","Aluna há 6 meses"],["Os treinos se encaixam na minha rotina e a Andressa ajusta tudo quando preciso. Sinto minha postura e minha força bem melhores.","Camila R.","Aluna há 4 meses"],["Eu tinha medo de treinar por causa da dor no joelho. Com o plano certo, voltei a me movimentar com segurança.","Fernanda L.","Aluna há 8 meses"]],k=0,d=document.getElementById("dots");
+T.forEach(function(){d.appendChild(document.createElement("span"))});
+function show(n){k=(n+T.length)%T.length;var t=T[k];tq.textContent=t[0];tn.textContent=t[1];tr.textContent=t[2];ti.textContent=t[1][0];[].forEach.call(d.children,function(s,i){s.className=i==k?"on":""})}
+prev.onclick=function(){show(k-1)};next.onclick=function(){show(k+1)};show(0);
+</script>
+<script>
+(function(){
+var h=document.querySelector("header"),pr=document.querySelector(".prog"),mb=document.querySelector(".menu");
+function sc(){var y=window.scrollY,m=document.documentElement.scrollHeight-innerHeight;h.classList.toggle("sc",y>30);pr.style.transform="scaleX("+(m>0?Math.min(y/m,1):0)+")"}
+addEventListener("scroll",sc,{passive:true});sc();
+mb.addEventListener("click",function(){var o=h.classList.toggle("open");mb.setAttribute("aria-expanded",o)});
+document.querySelectorAll("nav a").forEach(function(a){a.addEventListener("click",function(){h.classList.remove("open");mb.setAttribute("aria-expanded","false")})});
+var sel=[".svc",".step",".focus",".sec-head",".rehab .txt",".rehab li",".rehab .script",".about .two>div",".faq",".pillars>div",".cta>*"];
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.15,rootMargin:"0px 0px -40px 0px"});
+sel.forEach(function(q){document.querySelectorAll(q).forEach(function(el,i){el.classList.add("rv");el.style.setProperty("--d",(i%5)*.1+"s");io.observe(el)})});
+document.querySelectorAll(".two>div:first-child").forEach(function(e){e.classList.add("rv-l")});
+document.querySelectorAll(".two>div:last-child").forEach(function(e){e.classList.add("rv-r")});
+// depoimentos: troca automática com animação, pausa ao passar o mouse
+var cd=document.querySelector(".card"),t;
+var _s=window.show;
+function go(n){cd.classList.add("out");setTimeout(function(){_s(n);cd.classList.remove("out")},300)}
+function auto(){clearInterval(t);t=setInterval(function(){go(k+1)},6000)}
+document.getElementById("prev").onclick=function(){go(k-1);auto()};
+document.getElementById("next").onclick=function(){go(k+1);auto()};
+cd.addEventListener("mouseenter",function(){clearInterval(t)});cd.addEventListener("mouseleave",auto);
+auto();
+})();
+</script>
+</body>
+</html>
