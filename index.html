@@ -10,7 +10,7 @@
 <style>
 :root{--ink:#1a1615;--ink2:#262120;--nude:#e8c9b0;--nude2:#d9ad8f;--cream:#f4eee6;--paper:#faf7f2;--muted:#6f6560;--line:#ddd3c8;
 --serif:'Libre Baskerville',Georgia,serif;--sans:'Jost',system-ui,sans-serif;--script:'Caveat',cursive;
---hero-img:none;--rehab-img:none;--about-img:none;--cta-img:none;
+--hero-img:url("andressa-hero.jpg");--hero-img2:url("andressa-academia.jpg");--rehab-img:none;--about-img:none;--cta-img:none;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px));height:100%}
 *,*::before,*::after{box-sizing:inherit}
@@ -48,7 +48,14 @@ header .wrap{justify-content:flex-start}header .wrap .btn{margin-left:auto}}
 /* hero */
 .hero{position:relative;background:var(--ink) var(--hero-img) center right/cover;color:#fff;overflow:hidden}
 .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 80% 40%,#4a3a33 0,transparent 55%),linear-gradient(100deg,var(--ink) 35%,#2b2321 100%);z-index:0}
-.hero.has-img::before{background:linear-gradient(100deg,rgba(26,22,21,.92) 30%,rgba(26,22,21,.2))}
+/* foto à direita (enquadra só a Andressa, ignorando as faixas pretas do print) */
+.hero-photo{position:absolute;z-index:0;top:0;right:0;bottom:0;width:58%;background:#14100e var(--hero-img) 0 50%/auto 330% no-repeat;filter:brightness(1.6) contrast(1.05);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 40%);mask-image:linear-gradient(90deg,transparent 0,#000 40%)}
+.hero .quote{z-index:2;text-shadow:0 2px 12px rgba(0,0,0,.8)}
+@media(min-width:1500px){.hero-photo{width:52%}}
+@media(max-width:1100px){.hero-photo{width:62%;background-position:0 50%}}
+@media(max-width:980px){.hero-photo{width:80%;opacity:.8}.hero p.lead{max-width:420px}}
+@media(max-width:760px){.hero-photo{width:100%;opacity:.4;background-size:auto 260%;background-position:12% 50%;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 55%);mask-image:linear-gradient(180deg,transparent 0,#000 55%)}.hero p.lead{max-width:none;text-shadow:0 1px 8px rgba(0,0,0,.7)}.hero h1{text-shadow:0 2px 12px rgba(0,0,0,.7)}}
+@media(max-width:380px){.hero .btn{padding:14px 18px;font-size:.76rem}.badges div{font-size:.72rem}}
 .hero .wrap{position:relative;z-index:1;padding-top:84px;padding-bottom:40px;min-height:520px}
 .cred{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(232,201,176,.45);color:var(--nude);padding:8px 16px;border-radius:999px;font-size:.78rem;margin-bottom:24px;max-width:100%}.cred svg{width:20px;height:20px;flex:none}
 .eyebrow{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--nude);margin-bottom:20px}
@@ -224,12 +231,12 @@ footer .alu small{font-size:.74rem;opacity:.65;padding-left:4px}
 
 <main>
 <section class="hero" id="inicio" style="padding:0">
+<div class="hero-photo" role="img" aria-label="Foto da Andressa Pigoli"></div>
 <div class="wrap">
 <div class="cred"><svg class="i" viewBox="0 0 24 24"><path d="M3 9l9-5 9 5-9 5zM7 11.500V16c0 1.500 2.200 3 5 3s5-1.500 5-3v-4.500"/></svg>Pós-graduada em Correção Postural e Reabilitação de Lesões</div>
 <h1>Fortaleça seu corpo, alivie a dor e melhore sua postura.</h1>
 <p class="lead">Sou Andressa Pigoli, personal trainer e coach. Treinos individualizados, com técnica e segurança, para você evoluir sem se lesionar e se movimentar melhor todos os dias.</p>
 <a class="btn wpp" href="#"><svg><use href="#wa"/></svg>Agende seu treino personalizado</a><a class="btn ghost" href="aluno.html">Área do aluno</a>
-<div class="quote script">Fortalecer<br>também é<br>se cuidar.</div>
 <div class="badges">
 <div><svg class="i" viewBox="0 0 24 24"><path d="M6 8v8M18 8v8M3 10v4M21 10v4M6 12h12"/></svg>Treino<br>personalizado</div>
 <div><svg class="i" viewBox="0 0 24 24"><path d="M12 3v6l-3 3 3 3v6M12 9l3 3"/></svg>Reabilitação<br>de lesões</div>
