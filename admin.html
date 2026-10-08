@@ -266,8 +266,8 @@ $("nNome").onkeydown=function(e){if(e.key==="Enter")$("nAdd").click()};
 
 /* ---------- painel do aluno ---------- */
 function waLink(a){
-var base=new URL("./",location.href).href+"#treinos";
-var msg="Olá, "+a.nome.split(" ")[0]+"! Seu acesso aos treinos está pronto. Entre em "+base+" e digite o código: "+fc(a.id);
+var base=new URL("./aluno.html",location.href).href+"?c="+a.id;
+var msg="Olá, "+a.nome.split(" ")[0]+"! Seu app de treinos está pronto. Toque no link para entrar: "+base+" (seu código de acesso: "+fc(a.id)+")";
 return"https://wa.me/?text="+encodeURIComponent(msg)}
 function renderMain(){
 var m=$("main");m.innerHTML="";var a=cur&&find(cur);
