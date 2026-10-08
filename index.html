@@ -192,6 +192,71 @@ img,svg{max-width:100%}
 @media(max-width:520px){.hero .btn,.cta .btn,.rehab .btn,.about .btn{width:100%}.cred{border-radius:16px;font-size:.74rem}.rehab .txt,.rehab ul,.faq,.cta,.pillars{padding-left:20px;padding-right:20px}.card{padding:22px}.rehab .script,.about .script{font-size:1.3rem}.fab{width:52px;height:52px}}
 @media(min-width:1500px){.wrap{max-width:1260px}}
 @media(prefers-reduced-motion:reduce){.hero .wrap>*,.badges div,.hero::before,.focus svg,.fab::before,.hero .quote::after{animation:none!important}.js .rv{opacity:1!important;transform:none!important}}
+
+/* ===== área do aluno: treinos ===== */
+[hidden]{display:none!important}
+.treinos{background:#fff}
+.tr-login{max-width:480px;background:var(--cream);padding:32px;border-left:6px solid var(--nude2)}
+.tr-login label{display:block;font-family:var(--serif);font-size:1.1rem;margin-bottom:14px}
+.tr-row{display:flex;gap:10px;flex-wrap:wrap}
+.tr-row input{flex:1;min-width:180px;padding:14px 18px;border:1px solid var(--line);border-radius:999px;font:inherit;font-size:1rem;letter-spacing:.1em;text-transform:uppercase;background:#fff;color:var(--ink)}
+.tr-err{color:#a33;font-size:.88rem;min-height:1.4em;margin-top:10px}
+.tr-hint{font-size:.88rem;color:var(--muted)}.tr-hint a{text-decoration:underline}
+.tr-app{max-width:760px}
+.tr-top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:20px}
+.tr-top .script{color:var(--ink);font-size:1.7rem}
+.tr-link{background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;font:inherit;font-size:.85rem;padding:8px 0}
+.tr-tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:22px}
+.tr-tabs button{flex:none;border:1px solid var(--line);background:#fff;border-radius:999px;padding:10px 22px;font:inherit;font-size:.88rem;cursor:pointer;color:var(--ink);min-height:44px}
+.tr-tabs button.on{background:var(--ink);color:var(--nude);border-color:var(--ink)}
+.tr-head h3{font-size:1.4rem}.tr-head p{color:var(--muted);margin-top:4px}
+.tr-bar{display:flex;align-items:center;gap:14px;margin:18px 0 8px;font-size:.85rem;color:var(--muted)}
+.tr-bar div{flex:1;height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.tr-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--nude2),var(--nude));transition:width .4s}
+.tr-list{list-style:none;margin:0;padding:0}
+.tr-list li{display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-bottom:1px solid var(--line)}
+.tr-list input{width:26px;height:26px;margin:2px 0 0;accent-color:var(--ink);flex:none;cursor:pointer}
+.tr-list .b{flex:1}
+.tr-list b{font-family:var(--serif);font-weight:400;font-size:1.02rem;display:block}
+.tr-list .m{font-size:.9rem;margin-top:4px}
+.tr-list .o{color:var(--muted);font-size:.85rem;margin-top:4px;font-weight:300}
+.tr-list li.ok b{text-decoration:line-through}.tr-list li.ok .b{opacity:.5}
+.tr-rest{flex:none;border:1px solid var(--nude2);background:var(--cream);border-radius:999px;padding:8px 14px;font:inherit;font-size:.78rem;cursor:pointer;color:var(--ink);min-height:40px}
+.tr-timer{position:sticky;bottom:calc(86px + env(safe-area-inset-bottom,0px));margin:16px auto 0;background:var(--ink);color:var(--nude);padding:14px 20px;border-radius:999px;text-align:center;font-size:.95rem;z-index:5;max-width:420px}
+.btn.ghost{background:transparent;color:var(--nude);border:1px solid var(--nude);box-shadow:none;margin-left:12px}
+.btn.ghost:hover{background:rgba(232,201,176,.15)}
+@media(max-width:520px){.btn.ghost{margin:12px 0 0}.tr-login{padding:24px 20px}.tr-list li{gap:12px}.tr-list li{flex-wrap:wrap}.tr-rest{margin-left:38px}}
+
+/* ===== painel do aluno e da profissional ===== */
+.tr-in,.tr-fields input,.tr-fields textarea,.tr-adm input,.tr-adm textarea,.tr-login input{font:inherit;font-size:1rem;color:var(--ink)}
+.tr-prof{display:grid;grid-template-columns:110px 1fr;gap:24px;background:var(--cream);padding:24px;margin-bottom:26px;border-left:6px solid var(--nude2)}
+.tr-photo{position:relative;width:104px;height:104px;border-radius:50%;background:var(--nude);display:grid;place-items:center;overflow:hidden;cursor:pointer;font-family:var(--serif);font-size:2.4rem;border:3px solid #fff;box-shadow:0 6px 18px rgba(26,22,21,.15)}
+.tr-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tr-photo::after{content:"Trocar";position:absolute;left:0;right:0;bottom:0;background:rgba(26,22,21,.6);color:#fff;font:500 .65rem var(--sans);text-align:center;padding:4px 0;letter-spacing:.08em;text-transform:uppercase}
+.tr-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px;align-content:start}
+.tr-fields label{font-size:.78rem;color:var(--muted);display:block}
+.tr-fields input,.tr-fields textarea{width:100%;margin-top:4px;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.tr-fields .full{grid-column:1/-1}
+.tr-fields .act{grid-column:1/-1;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.tr-fields .btn{padding:12px 24px}
+.tr-load{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+.tr-load input{width:96px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#fff}
+.tr-load .tr-rest{min-height:38px}
+.tr-login input{width:100%;padding:14px 18px;border:1px solid var(--line);border-radius:999px;margin-bottom:12px;background:#fff}
+.tr-adm{max-width:860px}
+.ad-add{display:flex;gap:10px;flex-wrap:wrap;background:var(--cream);padding:22px;border-left:6px solid var(--nude2)}
+.ad-add input{flex:1;min-width:200px;padding:14px 18px;border:1px solid var(--line);border-radius:999px;background:#fff}
+.ad-new{margin:14px 0 26px;font-family:var(--serif);color:var(--ink);min-height:1.4em}
+.ad-card{border:1px solid var(--line);padding:18px 20px;margin-bottom:14px;background:#fff}
+.ad-h{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.ad-code{font-family:var(--serif);letter-spacing:.14em;background:var(--ink);color:var(--nude);padding:6px 14px;border-radius:999px;font-size:.95rem}
+.ad-act{display:flex;gap:8px;flex-wrap:wrap}
+.ad-act .tr-rest,.ad-act a{display:inline-flex;align-items:center}
+.ad-box{margin-top:14px;font-size:.88rem}
+.ad-box textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;font:.85rem/1.5 ui-monospace,Menlo,monospace;background:var(--paper)}
+.ad-box p{color:var(--muted);margin:6px 0}
+.ad-box h4{font-family:var(--serif);font-weight:400;margin:14px 0 4px}
+@media(max-width:620px){.tr-prof{grid-template-columns:1fr;justify-items:center;padding:20px}.tr-fields{grid-template-columns:1fr;width:100%}}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 </head>
@@ -203,7 +268,7 @@ img,svg{max-width:100%}
 <header>
 <div class="wrap">
 <a class="logo" href="#inicio" aria-label="Andressa Pigoli Personal"><b>AP</b><span>Andressa Pigoli<small>PERSONAL</small></span></a>
-<nav aria-label="Principal"><a href="#inicio">Início</a><a href="#sobre">Sobre</a><a href="#servicos">Serviços</a><a href="#depoimentos">Depoimentos</a><a href="#faq">FAQ</a><a href="#contato">Contato</a></nav>
+<nav aria-label="Principal"><a href="#inicio">Início</a><a href="#treinos">Meus treinos</a><a href="#sobre">Sobre</a><a href="#servicos">Serviços</a><a href="#depoimentos">Depoimentos</a><a href="#faq">FAQ</a><a href="#contato">Contato</a></nav>
 <a class="btn wpp" href="#"><svg><use href="#wa"/></svg>Falar comigo</a>
 <button class="menu" aria-label="Abrir menu" aria-expanded="false"><span></span></button>
 </div>
@@ -216,13 +281,61 @@ img,svg{max-width:100%}
 <div class="cred"><svg class="i" viewBox="0 0 24 24"><path d="M3 9l9-5 9 5-9 5zM7 11.500V16c0 1.500 2.200 3 5 3s5-1.500 5-3v-4.500"/></svg>Pós-graduada em Correção Postural e Reabilitação de Lesões</div>
 <h1>Fortaleça seu corpo, alivie a dor e melhore sua postura.</h1>
 <p class="lead">Sou Andressa Pigoli, personal trainer e coach. Treinos individualizados, com técnica e segurança, para você evoluir sem se lesionar e se movimentar melhor todos os dias.</p>
-<a class="btn wpp" href="#"><svg><use href="#wa"/></svg>Agende seu treino personalizado</a>
+<a class="btn wpp" href="#"><svg><use href="#wa"/></svg>Agende seu treino personalizado</a><a class="btn ghost" href="#treinos">Acessar meus treinos</a>
 <div class="quote script">Fortalecer<br>também é<br>se cuidar.</div>
 <div class="badges">
 <div><svg class="i" viewBox="0 0 24 24"><path d="M6 8v8M18 8v8M3 10v4M21 10v4M6 12h12"/></svg>Treino<br>personalizado</div>
 <div><svg class="i" viewBox="0 0 24 24"><path d="M12 3v6l-3 3 3 3v6M12 9l3 3"/></svg>Reabilitação<br>de lesões</div>
 <div><svg class="i" viewBox="0 0 24 24"><path d="M12 3v18M9 5h6M8 9h8M9 13h6M10 17h4"/></svg>Correção<br>postural</div>
 <div><svg class="i" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.500 8-8 9-4.500-1-8-4-8-9V6z"/></svg>Suporte via app<br>e WhatsApp</div>
+</div>
+</div>
+</section>
+
+<section class="treinos" id="treinos">
+<div class="wrap">
+<div class="sec-head"><div><h2>Meus treinos</h2><p>Seu painel pessoal: treinos, cargas e evolução, tudo aqui mesmo.</p></div><div class="tag">Área do aluno</div></div>
+
+<div class="tr-login" id="trLogin">
+<label for="trCode">Digite seu código de acesso</label>
+<div class="tr-row"><input id="trCode" type="text" autocomplete="off" autocapitalize="characters" placeholder="XXXX-XXXX" style="margin:0;flex:1;min-width:180px;text-transform:uppercase;letter-spacing:.1em"><button class="btn" id="trEnter" type="button">Acessar</button></div>
+<p class="tr-err" id="trErr" role="alert"></p>
+<p class="tr-hint">Ainda não tem código? <a class="wpp" href="#">Peça no WhatsApp</a></p>
+</div>
+
+<div class="tr-app" id="trApp" hidden>
+<div class="tr-top"><span class="script" id="trHi"></span><button class="tr-link" id="trOut" type="button">Sair</button></div>
+<div class="tr-prof">
+<label class="tr-photo"><img id="trImg" alt="Sua foto" hidden><span id="trIni"></span><input type="file" id="trFile" accept="image/*" hidden></label>
+<div class="tr-fields">
+<label>Peso (kg)<input id="pfPeso" inputmode="decimal"></label>
+<label>Altura (cm)<input id="pfAlt" inputmode="numeric"></label>
+<label class="full">Objetivo<input id="pfObj" maxlength="120"></label>
+<label class="full">Observações (lesões, dores, rotina)<textarea id="pfObs" rows="2" maxlength="400"></textarea></label>
+<div class="act"><button class="btn" id="pfSave" type="button">Salvar informações</button><span id="pfMsg" role="status"></span></div>
+</div>
+</div>
+<div class="tr-tabs" id="trTabs" role="tablist" aria-label="Treinos"></div>
+<div class="tr-head"><h3 id="trTitle"></h3><p id="trFocus"></p></div>
+<div class="tr-bar"><div><i id="trBar"></i></div><span id="trPct"></span></div>
+<ul class="tr-list" id="trList"></ul>
+<button class="tr-link" id="trReset" type="button">Reiniciar marcações deste treino</button>
+<div class="tr-timer" id="trTimer" role="timer" aria-live="polite" hidden></div>
+</div>
+
+<div class="tr-login" id="adLogin" hidden>
+<label for="adMail">Área da Andressa</label>
+<input id="adMail" type="email" autocomplete="username" placeholder="E-mail">
+<input id="adPass" type="password" autocomplete="current-password" placeholder="Senha">
+<div class="tr-row"><button class="btn" id="adEnter" type="button">Entrar</button><button class="tr-link" id="adBack" type="button">Voltar</button></div>
+<p class="tr-err" id="adErr" role="alert"></p>
+</div>
+
+<div class="tr-adm" id="adApp" hidden>
+<div class="tr-top"><span class="script">Painel da Andressa</span><button class="tr-link" id="adOut" type="button">Sair</button></div>
+<div class="ad-add"><input id="adNome" placeholder="Nome do novo aluno" maxlength="80"><button class="btn" id="adAdd" type="button">Cadastrar e gerar código</button></div>
+<p class="ad-new" id="adNew" role="status"></p>
+<div id="adList"></div>
 </div>
 </div>
 </section>
@@ -320,12 +433,142 @@ img,svg{max-width:100%}
 <div class="wrap">
 <a class="logo" href="#inicio"><b>AP</b><span>Andressa Pigoli<small>PERSONAL</small></span></a>
 <div class="soc"><a href="https://www.instagram.com/andressapigoli.personal" aria-label="Instagram"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.500 6.500h.01"/></svg></a><a class="wpp" href="#" aria-label="WhatsApp"><svg class="i" viewBox="0 0 24 24"><use href="#wa"/></svg></a></div>
-<div class="links"><a href="#inicio">Início</a><a href="#sobre">Sobre</a><a href="#servicos">Serviços</a><a href="#depoimentos">Depoimentos</a><a href="#faq">FAQ</a><a href="#contato">Contato</a></div>
+<div class="links"><a href="#inicio">Início</a><a href="#treinos">Meus treinos</a><a href="#sobre">Sobre</a><a href="#servicos">Serviços</a><a href="#depoimentos">Depoimentos</a><a href="#faq">FAQ</a><a href="#contato">Contato</a><a href="#treinos" id="adLink">Área da Andressa</a></div>
 <div class="end">Movimento é vida. E eu estou aqui para te ajudar.</div>
 </div>
 </footer>
 <a class="fab wpp" href="#" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24"><use href="#wa"/></svg></a>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+// ===== ÁREA DO ALUNO + PAINEL DA PROFISSIONAL =====
+// Dados guardados no Firebase (Firestore). Cole abaixo a configuração do seu projeto Firebase.
+// REGRAS do Firestore (troque o e-mail pelo da Andressa):
+// rules_version='2'; service cloud.firestore { match /databases/{d}/documents {
+//   function adm(){return request.auth!=null && request.auth.token.email=='EMAIL_DA_ANDRESSA@gmail.com'}
+//   match /alunos/{c} { allow get: if true; allow list, create, delete: if adm();
+//     allow update: if adm() || request.resource.data.diff(resource.data).affectedKeys().hasOnly(['perfil','cargas']); } } }
+(function(){
+var CFG={
+  apiKey:"AIzaSyC-8N9WGdi6ygH7Ll-Tudicjl1VZynlmc",
+  authDomain:"andressa-pigoli.firebaseapp.com",
+  projectId:"andressa-pigoli",
+  appId:"1:1046816637938:web:c40449c3f63ac1588b616b"
+};
+var db=null,auth=null,usr=null,code="",al=null,ti=0,tm=null;
+function g(i){return document.getElementById(i)}
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function st(k,v){try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){}return null}
+function show(id){["trLogin","trApp","adLogin","adApp"].forEach(function(x){g(x).hidden=x!=id})}
+function clean(c){return(c||"").toUpperCase().replace(/[^A-Z0-9]/g,"")}
+function fc(c){return c.slice(0,4)+"-"+c.slice(4)}
+function gen(){var A="ABCDEFGHJKLMNPQRSTUVWXYZ23456789",b=new Uint8Array(8),o="";crypto.getRandomValues(b);for(var i=0;i<8;i++)o+=A[b[i]%32];return o}
+function today(){var d=new Date();return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2)}
+function dt(d){return d.slice(8,10)+"/"+d.slice(5,7)}
+function ref(c){return db.collection("alunos").doc(c||code)}
+if(CFG.projectId&&typeof firebase!="undefined"){firebase.initializeApp(CFG);db=firebase.firestore();auth=firebase.auth();auth.onAuthStateChanged(function(u){usr=u})}
+function notReady(id){g(id).textContent="A área do aluno ainda não foi configurada.";return true}
+
+/* ---------- aluno ---------- */
+function enter(raw,quiet){
+var c=clean(raw);
+if(!db){if(!quiet)notReady("trErr");return}
+if(c.length!=8){if(!quiet)g("trErr").textContent="Código inválido. Ele tem 8 letras e números.";return}
+g("trErr").textContent=quiet?"":"Entrando...";
+ref(c).get().then(function(s){
+if(!s.exists){st("ap_code",null);g("trErr").textContent=quiet?"":"Código não encontrado. Confira e tente novamente.";return}
+code=c;al=s.data();al.perfil=al.perfil||{};al.cargas=al.cargas||{};al.treinos=al.treinos||[];
+st("ap_code",c);g("trErr").textContent="";ti=0;panel()
+}).catch(function(){g("trErr").textContent=quiet?"":"Não foi possível acessar agora. Tente de novo."})}
+function panel(){
+show("trApp");var p=al.perfil;
+g("trHi").textContent="Olá, "+al.nome.split(" ")[0]+"! Bora treinar?";
+photo();g("pfPeso").value=p.peso||"";g("pfAlt").value=p.altura||"";g("pfObj").value=p.objetivo||"";g("pfObs").value=p.obs||"";g("pfMsg").textContent="";
+tabs();render()}
+function photo(){var f=al.perfil.foto,i=g("trImg");i.hidden=!f;if(f)i.src=f;g("trIni").hidden=!!f;g("trIni").textContent=al.nome.charAt(0).toUpperCase()}
+function resize(file,cb){var r=new FileReader();r.onload=function(){var i=new Image();i.onload=function(){var n=240,c=document.createElement("canvas"),m=Math.min(i.width,i.height);c.width=c.height=n;c.getContext("2d").drawImage(i,(i.width-m)/2,(i.height-m)/2,m,m,0,0,n,n);cb(c.toDataURL("image/jpeg",.8))};i.src=r.result};r.readAsDataURL(file)}
+g("trFile").onchange=function(){var f=this.files[0];if(!f)return;resize(f,function(u){al.perfil.foto=u;photo();ref().update({perfil:al.perfil}).then(function(){g("pfMsg").textContent="Foto atualizada!"}).catch(function(){g("pfMsg").textContent="Não foi possível salvar a foto."})})};
+g("pfSave").onclick=function(){var p=al.perfil;p.peso=g("pfPeso").value.trim();p.altura=g("pfAlt").value.trim();p.objetivo=g("pfObj").value.trim();p.obs=g("pfObs").value.trim();
+ref().update({perfil:p}).then(function(){g("pfMsg").textContent="Informações salvas!"}).catch(function(){g("pfMsg").textContent="Erro ao salvar. Tente de novo."})};
+function ck(){return"ap_"+code+"_"+ti}
+function done(){try{return JSON.parse(st(ck())||"[]")}catch(e){return[]}}
+function tabs(){
+var t=g("trTabs");t.innerHTML="";
+al.treinos.forEach(function(w,i){var b=el("button",i==ti?"on":"",w.n);b.type="button";b.setAttribute("role","tab");b.setAttribute("aria-selected",i==ti);b.onclick=function(){ti=i;stop();tabs();render()};t.appendChild(b)})}
+function stop(){clearInterval(tm);g("trTimer").hidden=true}
+function rest(n){clearInterval(tm);var left=n,e=g("trTimer");e.hidden=false;
+function tick(){if(left<0){clearInterval(tm);e.textContent="Descanso finalizado. Próxima série!";if(navigator.vibrate)navigator.vibrate(300);return}
+e.textContent="Descanso: "+Math.floor(left/60)+":"+("0"+left%60).slice(-2);left--}
+tick();tm=setInterval(tick,1000)}
+function progress(){var n=(al.treinos[ti]||{ex:[]}).ex.length,d=done().length;g("trBar").style.width=(n?d/n*100:0)+"%";g("trPct").textContent=d+" de "+n+(n&&d==n?" · treino concluído!":" exercícios")}
+function render(){
+var ul=g("trList"),w=al.treinos[ti];ul.innerHTML="";
+if(!w){g("trTitle").textContent="Seu treino está sendo preparado";g("trFocus").textContent="A Andressa vai cadastrar seus treinos em breve.";progress();return}
+g("trTitle").textContent=w.n;g("trFocus").textContent=w.f||"";var dn=done();
+w.ex.forEach(function(e,i){
+var k=ti+"_"+i,li=el("li",dn.indexOf(i)>-1?"ok":""),cb=el("input"),b=el("div","b"),hs=el("div","o"),inp=el("input"),sv=el("button","tr-rest","Salvar carga"),ld=el("div","tr-load"),r=el("button","tr-rest","⏱ "+e.d+"s");
+cb.type="checkbox";cb.checked=dn.indexOf(i)>-1;cb.setAttribute("aria-label","Concluir "+e.nm);
+cb.onchange=function(){var a=done().filter(function(x){return x!=i});if(cb.checked)a.push(i);st(ck(),JSON.stringify(a));li.className=cb.checked?"ok":"";progress()};
+b.appendChild(el("b",null,e.nm));b.appendChild(el("div","m",e.s+" séries × "+e.r+" · descanso "+e.d+"s"));if(e.o)b.appendChild(el("div","o",e.o));
+inp.type="number";inp.step="0.5";inp.min="0";inp.placeholder="kg";inp.setAttribute("aria-label","Carga em kg: "+e.nm);
+function hist(){var h=al.cargas[k]||[];hs.textContent=h.length?"Cargas: "+h.slice(-4).reverse().map(function(x){return x.kg+" kg ("+dt(x.d)+")"}).join(" · "):"Nenhuma carga registrada ainda."}
+sv.type="button";sv.onclick=function(){var v=parseFloat(inp.value);if(!(v>=0))return;
+var h=(al.cargas[k]||[]).filter(function(x){return x.d!=today()});h.push({d:today(),kg:v});al.cargas[k]=h;
+ref().update({cargas:al.cargas}).then(function(){inp.value="";hist();sv.textContent="Salvo ✓";setTimeout(function(){sv.textContent="Salvar carga"},1500)}).catch(function(){sv.textContent="Erro. Tente de novo"})};
+ld.appendChild(inp);ld.appendChild(sv);b.appendChild(ld);b.appendChild(hs);hist();
+r.type="button";r.onclick=function(){rest(e.d)};
+li.appendChild(cb);li.appendChild(b);li.appendChild(r);ul.appendChild(li)});
+progress()}
+g("trReset").onclick=function(){st(ck(),null);render()};
+g("trEnter").onclick=function(){enter(g("trCode").value)};
+g("trCode").onkeydown=function(e){if(e.key=="Enter")enter(this.value)};
+g("trOut").onclick=function(){st("ap_code",null);stop();al=null;g("trCode").value="";show("trLogin")};
+
+/* ---------- painel da Andressa ---------- */
+function parse(t){var w=[],c=null;t.split("\n").forEach(function(l){l=l.trim();if(!l)return;var p=l.replace(/^#/,"").split("|");
+if(l.charAt(0)=="#"){c={n:p[0].trim(),f:(p[1]||"").trim(),ex:[]};w.push(c)}
+else if(c)c.ex.push({nm:p[0].trim(),s:(p[1]||"3").trim(),r:(p[2]||"12").trim(),d:parseInt(p[3])||60,o:(p[4]||"").trim()})});return w}
+function fmt(w){return w.map(function(t){return"# "+t.n+" | "+(t.f||"")+"\n"+t.ex.map(function(e){return[e.nm,e.s,e.r,e.d,e.o||""].join(" | ")}).join("\n")}).join("\n\n")}
+var EX="# Treino A | Inferiores e core\nAgachamento livre | 3 | 12 | 60 | Joelhos alinhados com os pés\nElevação pélvica | 3 | 15 | 60 | Sem arquear a lombar\n\n# Treino B | Superiores\nRemada curvada | 3 | 12 | 60 | Escápulas juntas no final";
+function card(id,d){
+var c=el("div","ad-card"),h=el("div","ad-h"),ac=el("div","ad-act"),bx=el("div","ad-box");
+h.appendChild(el("b",null,d.nome));h.appendChild(el("span","ad-code",fc(id)));
+function btn(t,f){var b=el("button","tr-rest",t);b.type="button";b.onclick=f;ac.appendChild(b);return b}
+var msg="Olá, "+d.nome.split(" ")[0]+"! Seu acesso aos treinos está pronto. Entre em "+location.href.split("#")[0]+"#treinos e digite o código: "+fc(id);
+btn("Copiar código",function(){try{navigator.clipboard.writeText(fc(id))}catch(e){}this.textContent="Copiado ✓"});
+var wa=el("a","tr-rest","Enviar no WhatsApp");wa.href="https://wa.me/?text="+encodeURIComponent(msg);wa.target="_blank";wa.rel="noopener";ac.appendChild(wa);
+btn("Treinos",function(){
+if(bx.dataset.m=="t"){bx.innerHTML="";bx.dataset.m="";return}bx.dataset.m="t";bx.innerHTML="";
+var ta=el("textarea");ta.rows=12;ta.value=d.treinos&&d.treinos.length?fmt(d.treinos):EX;
+var sv=el("button","btn","Salvar treinos"),ms=el("span");sv.type="button";sv.style.cssText="padding:10px 22px;margin-top:10px";
+sv.onclick=function(){var w=parse(ta.value);ref(id).update({treinos:w}).then(function(){d.treinos=w;ms.textContent=" Salvo! Já aparece para o aluno."}).catch(function(){ms.textContent=" Erro ao salvar."})};
+bx.appendChild(el("p",null,"Uma linha # para cada treino (# Nome | foco). Abaixo, um exercício por linha: nome | séries | repetições | descanso em segundos | observação."));
+bx.appendChild(ta);bx.appendChild(sv);bx.appendChild(ms)});
+btn("Dados e cargas",function(){
+if(bx.dataset.m=="d"){bx.innerHTML="";bx.dataset.m="";return}bx.dataset.m="d";bx.innerHTML="";
+ref(id).get().then(function(s){var x=s.data(),p=x.perfil||{},cg=x.cargas||{};
+bx.appendChild(el("p",null,"Peso: "+(p.peso||"–")+" kg · Altura: "+(p.altura||"–")+" cm · Objetivo: "+(p.objetivo||"–")));
+if(p.obs)bx.appendChild(el("p",null,"Observações: "+p.obs));
+(x.treinos||[]).forEach(function(w,i){w.ex.forEach(function(e,j){var h=cg[i+"_"+j];if(h&&h.length){bx.appendChild(el("h4",null,w.n+" · "+e.nm));bx.appendChild(el("p",null,h.slice(-6).map(function(y){return y.kg+" kg ("+dt(y.d)+")"}).join(" · ")))}})});
+if(bx.children.length==(p.obs?2:1))bx.appendChild(el("p",null,"O aluno ainda não registrou cargas."))})});
+btn("Excluir",function(){if(confirm("Excluir "+d.nome+"? Isso apaga treinos e histórico.")){ref(id).delete().then(list)}});
+c.appendChild(h);c.appendChild(ac);c.appendChild(bx);return c}
+function list(){var bx=g("adList");bx.textContent="Carregando...";
+db.collection("alunos").orderBy("criado","desc").get().then(function(q){bx.innerHTML="";if(q.empty){bx.textContent="Nenhum aluno cadastrado ainda.";return}q.forEach(function(d){bx.appendChild(card(d.id,d.data()))})}).catch(function(){bx.textContent="Não foi possível carregar os alunos."})}
+function admin(){show("adApp");g("adNew").textContent="";list()}
+g("adLink").onclick=function(){if(!db){show("trLogin");notReady("trErr");return}usr?admin():show("adLogin")};
+g("adBack").onclick=function(){show(al?"trApp":"trLogin")};
+g("adEnter").onclick=function(){if(!auth){notReady("adErr");return}g("adErr").textContent="";
+auth.signInWithEmailAndPassword(g("adMail").value.trim(),g("adPass").value).then(function(){g("adPass").value="";admin()}).catch(function(){g("adErr").textContent="E-mail ou senha incorretos."})};
+g("adOut").onclick=function(){auth.signOut();show("trLogin")};
+g("adAdd").onclick=function(){var n=g("adNome").value.trim();if(!n)return;var c=gen();
+db.collection("alunos").doc(c).set({nome:n,criado:Date.now(),treinos:[],perfil:{},cargas:{}}).then(function(){g("adNome").value="";g("adNew").textContent="Aluno cadastrado! Código de "+n+": "+fc(c);list()}).catch(function(){g("adNew").textContent="Não foi possível cadastrar. Tente de novo."})};
+
+if(!db)notReady("trErr");else if(st("ap_code"))enter(st("ap_code"),true);
+})();
+</script>
 <script>
 // Troque pelo número real (DDD + número, só dígitos)
 var WHATSAPP="556992903002",MSG="Olá, Andressa! Vim pelo seu Instagram e quero saber mais sobre a consultoria.";
