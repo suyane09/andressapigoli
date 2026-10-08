@@ -153,6 +153,17 @@ label.f>input,label.f>select,label.f>textarea{margin-top:5px;text-transform:none
 .ex .t input{flex:1 1 100%;order:3}
 .ex .ib{margin-left:auto}
 }
+
+/* modal de confirmação */
+#mdl{position:fixed;inset:0;z-index:80;background:rgba(26,22,21,.55);display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s}
+#mdl.on{opacity:1;pointer-events:auto}
+#mdl .card{width:100%;max-width:400px;background:var(--paper);border-top:6px solid var(--red);border-radius:6px;padding:28px 26px 22px;box-shadow:0 20px 50px rgba(0,0,0,.3);transform:translateY(12px);transition:transform .2s}
+#mdl.on .card{transform:none}
+#mdl h3{font-size:1.2rem;margin-bottom:10px}
+#mdl p{color:var(--muted);font-size:.92rem}
+#mdl .acts2{display:flex;gap:10px;justify-content:flex-end;margin-top:22px;flex-wrap:wrap}
+#mdl .btn.danger{background:var(--red);color:#fff}
+#mdl .btn.danger:hover{background:#8a2a2a}
 </style>
 </head>
 <body>
@@ -185,6 +196,7 @@ label.f>input,label.f>select,label.f>textarea{margin-top:5px;text-transform:none
 </div>
 </div>
 <div id="toast" role="status"></div>
+<div id="mdl" role="dialog" aria-modal="true" aria-labelledby="mdlT"><div class="card"><h3 id="mdlT"></h3><p id="mdlP"></p><div class="acts2"><button type="button" class="sm" id="mdlNo">Cancelar</button><button type="button" class="btn danger" id="mdlYes"></button></div></div></div>
 
 <datalist id="exlist">
 <option value="Agachamento livre"><option value="Agachamento sumô"><option value="Agachamento búlgaro"><option value="Afundo"><option value="Passada (avanço)"><option value="Leg press 45°"><option value="Cadeira extensora"><option value="Mesa flexora"><option value="Cadeira flexora"><option value="Cadeira abdutora"><option value="Cadeira adutora"><option value="Stiff"><option value="Levantamento terra romeno"><option value="Elevação pélvica"><option value="Glúteo 4 apoios"><option value="Panturrilha em pé"><option value="Panturrilha sentada"><option value="Supino reto"><option value="Supino inclinado"><option value="Crucifixo"><option value="Flexão de braço"><option value="Puxada frontal"><option value="Remada curvada"><option value="Remada baixa"><option value="Remada unilateral"><option value="Desenvolvimento com halteres"><option value="Elevação lateral"><option value="Elevação frontal"><option value="Rosca direta"><option value="Rosca martelo"><option value="Tríceps corda"><option value="Tríceps testa"><option value="Prancha abdominal"><option value="Abdominal infra"><option value="Abdominal supra"><option value="Bird dog"><option value="Dead bug"><option value="Ponte de glúteo"><option value="Mobilidade de quadril"><option value="Mobilidade de ombro"><option value="Alongamento"><option value="Esteira (caminhada)"><option value="Bicicleta ergométrica">
@@ -210,6 +222,12 @@ function h(tag,props,kids){var e=document.createElement(tag);for(var k in (props
 
 var ALU=[],cur=null,tab="treinos",ed=[],sel=0,dirty=false,Q="";
 
+function ask(o,ok){var m=$("mdl");$("mdlT").textContent=o.titulo;$("mdlP").textContent=o.texto;$("mdlYes").textContent=o.botao||"Excluir";
+function close(){m.className="";document.removeEventListener("keydown",key)}
+function key(e){if(e.key==="Escape")close()}
+$("mdlNo").onclick=close;m.onclick=function(e){if(e.target===m)close()};
+$("mdlYes").onclick=function(){close();ok()};
+document.addEventListener("keydown",key);m.className="on";$("mdlNo").focus()}
 function toast(t){var e=$("toast");e.textContent=t;e.className="on";clearTimeout(toast.t);toast.t=setTimeout(function(){e.className=""},2600)}
 function gen(){var A="ABCDEFGHJKLMNPQRSTUVWXYZ23456789",b=new Uint8Array(8),o="";crypto.getRandomValues(b);for(var i=0;i<8;i++)o+=A[b[i]%32];return o}
 function fc(c){return c.slice(0,4)+"-"+c.slice(4)}
@@ -284,8 +302,8 @@ var body=h("div",{id:"body"});m.appendChild(body);
 if(tab==="treinos"){editor(body);m.appendChild(h("div",{class:"savebar"},[h("span",{id:"sbStat"}),h("button",{class:"btn",id:"sbBtn",type:"button",text:"Salvar treinos",onclick:save})]));stat()}
 else if(tab==="dados")dados(body,a);else evolucao(body,a)}
 function del(a){
-if(!confirm("Excluir "+a.nome+"? Isso apaga treinos e histórico de cargas e não dá para desfazer."))return;
-db.collection("alunos").doc(a.id).delete().then(function(){ALU=ALU.filter(function(x){return x.id!==a.id});cur=null;dirty=false;renderList();renderMain();toast("Aluno excluído.")}).catch(function(){toast("Não foi possível excluir.")})}
+ask({titulo:"Excluir "+a.nome+"?",texto:"Os treinos e o histórico de cargas deste aluno serão apagados. Essa ação não pode ser desfeita.",botao:"Sim, excluir"},function(){
+db.collection("alunos").doc(a.id).delete().then(function(){ALU=ALU.filter(function(x){return x.id!==a.id});cur=null;dirty=false;renderList();renderMain();toast("Aluno excluído.")}).catch(function(){toast("Não foi possível excluir.")})})}
 
 /* ---------- editor de treinos ---------- */
 function stat(){var s=$("sbStat");if(!s)return;s.className=dirty?"dirty":"";s.textContent=dirty?"Alterações não salvas":"Tudo salvo"}
@@ -311,7 +329,7 @@ var tools=h("div",{class:"tools"});
 tools.appendChild(h("button",{class:"sm",type:"button",text:"← Mover",disabled:sel===0,onclick:function(){swap(ed,sel,sel-1);sel--;mark();editor(box)}}));
 tools.appendChild(h("button",{class:"sm",type:"button",text:"Mover →",disabled:sel===ed.length-1,onclick:function(){swap(ed,sel,sel+1);sel++;mark();editor(box)}}));
 tools.appendChild(h("button",{class:"sm",type:"button",text:"Duplicar treino",onclick:function(){var c={n:w.n+" (cópia)",f:w.f,ex:w.ex.map(function(e){return{nm:e.nm,s:e.s,r:e.r,d:e.d,o:e.o,v:e.v,_k:null}})};ed.splice(sel+1,0,c);sel++;mark();editor(box)}}));
-tools.appendChild(h("button",{class:"sm danger",type:"button",text:"Excluir treino",onclick:function(){if(!confirm("Excluir “"+(w.n||"este treino")+"” e seus exercícios? O histórico de cargas desses exercícios também será removido ao salvar."))return;ed.splice(sel,1);sel=Math.max(0,sel-1);mark();editor(box)}}));
+tools.appendChild(h("button",{class:"sm danger",type:"button",text:"Excluir treino",onclick:function(){ask({titulo:"Excluir “"+(w.n||"este treino")+"”?",texto:"Os exercícios deste treino serão removidos, e o histórico de cargas deles também será apagado ao salvar.",botao:"Sim, excluir"},function(){ed.splice(sel,1);sel=Math.max(0,sel-1);mark();editor(box)})}}));
 wk.appendChild(tools);box.appendChild(wk);
 var list=h("div",{class:"exs"});
 w.ex.forEach(function(e,j){list.appendChild(exCard(w,e,j,box))});
