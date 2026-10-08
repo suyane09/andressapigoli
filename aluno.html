@@ -127,6 +127,7 @@ button.av{padding:0}
 .dx small{color:var(--muted);display:block}
 .dx a.v{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;text-decoration:underline;margin-top:4px}
 .dx a.v svg{width:16px;height:16px}
+.pvid{width:100%;max-height:300px;border-radius:12px;background:#000;display:block;margin:0 0 12px}.dx .pvid{margin:8px 0 0}
 
 /* ---------- evolução ---------- */
 .tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -378,6 +379,8 @@ function sheet(o){
 var bg=h("div",{class:"sbg",onclick:function(ev){if(ev.target===bg)bg.remove()}},[h("div",{class:"sheet",role:"dialog","aria-modal":"true"},[h("h3",{text:o.title}),o.text?h("p",{text:o.text}):null,
 h("div",{class:"sbtn"},o.btns.map(function(b){return h("button",{type:"button",class:"btn "+(b.cls||""),text:b.t,onclick:function(){bg.remove();if(b.fn)b.fn()}})}))])]);
 document.body.appendChild(bg)}
+function isUp(u){return/cloudinary\.com|firebasestorage|storage\.googleapis/.test(u||"")}
+function vplayer(u){return h("video",{class:"pvid",src:u,controls:true,playsinline:true,preload:"metadata"})}
 function ago(d){var n=Math.round((pd(today())-pd(d))/864e5);return n<=0?"hoje":n===1?"ontem":"há "+n+" dias"}
 
 var code="",al=null,tab="home",W=null,openJ=0,calM=null,tickT=null,restT=null,restEnd=0,restTot=0,wake=null,syncT=null,actx=null;
@@ -505,7 +508,7 @@ al.treinos.forEach(function(w,i){
 var open=false,det=h("div",{class:"det",hidden:true});
 w.ex.forEach(function(e,j){
 var r=h("div",{class:"dx"},[h("div",{class:"n",text:String(j+1)}),h("div",{style:"flex:1;min-width:0"},[h("b",{text:e.nm}),h("small",{text:e.s+" séries × "+e.r+(e.d?" · descanso "+e.d+"s":"")}),e.o?h("small",{text:e.o}):null])]);
-if(e.v&&/^https?:\/\//i.test(e.v))r.lastChild.appendChild(h("a",{class:"v",href:e.v,target:"_blank",rel:"noopener"},[ic("vid"),"Ver vídeo de execução"]));
+if(e.v&&isUp(e.v))r.lastChild.appendChild(vplayer(e.v));else if(e.v&&/^https?:\/\//i.test(e.v))r.lastChild.appendChild(h("a",{class:"v",href:e.v,target:"_blank",rel:"noopener"},[ic("vid"),"Ver vídeo de execução"]));
 det.appendChild(r)});
 det.appendChild(h("button",{class:"btn dark block",style:"margin-top:14px",type:"button",onclick:function(){startWork(i)}},[ic("play"),"Iniciar "+w.n]));
 var card=h("section",{class:"wo"});
@@ -618,7 +621,7 @@ h("span",{class:"cnt",text:dn+"/"+n})]));
 if(!open)return card;
 var b=h("div",{class:"xb"});
 if(e.o)b.appendChild(h("div",{class:"obs",text:e.o}));
-if(e.v&&/^https?:\/\//i.test(e.v))b.appendChild(h("a",{class:"vid",href:e.v,target:"_blank",rel:"noopener"},[ic("vid"),"Ver vídeo de execução"]));
+if(e.v&&isUp(e.v))b.appendChild(vplayer(e.v));else if(e.v&&/^https?:\/\//i.test(e.v))b.appendChild(h("a",{class:"vid",href:e.v,target:"_blank",rel:"noopener"},[ic("vid"),"Ver vídeo de execução"]));
 b.appendChild(h("div",{class:"sr hd2"},[h("span",{text:"SÉRIE"}),h("span",{text:"ANTERIOR"}),h("span",{text:"KG"}),h("span",{text:"REPS"}),h("span")]));
 for(var k=0;k<n;k++)(function(k){
 var key=j+"_"+k,s=W.sets[key]||{kg:"",ok:false};

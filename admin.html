@@ -168,6 +168,13 @@ label.f>input,label.f>select,label.f>textarea{margin-top:5px;text-transform:none
 .app.solo{grid-template-columns:1fr}.app.solo .side{display:none}.app.solo .main{display:block!important;max-width:900px;margin:0 auto;width:100%}.app.solo .savebar{left:0}
 .libbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:14px}.libbar select{flex:1;min-width:160px}
 .newlink{font-size:.85rem;color:var(--muted)}.newlink a{text-decoration:underline}
+
+.vup{margin-top:10px;border:1px dashed var(--nude2);border-radius:14px;padding:12px;background:var(--paper)}
+.vup .vr{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.vup video{width:100%;max-width:320px;max-height:240px;border-radius:10px;background:#000;margin-top:10px;display:block}
+.vup .pg{height:6px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:10px}
+.vup .pg i{display:block;height:100%;width:0;background:var(--nude2);transition:width .2s}
+.vup .vs{font-size:.82rem;color:var(--muted);margin-top:6px}
 </style>
 </head>
 <body>
@@ -220,6 +227,8 @@ var CFG={
   appId:"1:1046816637938:web:c40449c3f63ac1588b616b"
 };
 firebase.initializeApp(CFG);
+/* Vídeos: Cloudinary (gratuito). Preencha os dois valores abaixo. */
+var CLD_NAME="mzcedcu7",CLD_PRESET="treinos";
 var db=firebase.firestore(),auth=firebase.auth();
 var $=function(i){return document.getElementById(i)};
 function h(tag,props,kids){var e=document.createElement(tag);for(var k in (props||{})){var v=props[k];if(k==="class")e.className=v;else if(k==="text")e.textContent=v;else if(k.slice(0,2)==="on")e[k]=v;else if(v!==undefined&&v!==null&&v!==false)e.setAttribute(k,v===true?"":v)}(kids||[]).forEach(function(c){if(c)e.appendChild(typeof c==="string"?document.createTextNode(c):c)});return e}
@@ -352,9 +361,39 @@ fld("Repetições",h("input",{type:"text",value:e.r,maxlength:12,placeholder:"12
 fld("Descanso",rest(e.d,function(v){e.d=v}))]),
 h("div",{class:"g2"},[
 fld("Observação / execução",txt(e.o,"Ex.: Joelhos alinhados com os pés",200,function(v){e.o=v})),
-fld("Link do vídeo (opcional)",txt(e.v,"https://...",300,function(v){e.v=v}))])])}
+fld("Ou cole um link de vídeo",txt(e.v,"https://...",300,function(v){e.v=v}))]),
+vidBox(e,box)])}
+function isUp(u){return/cloudinary\.com|firebasestorage|storage\.googleapis/.test(u||"")}
+function vidBox(e,box){
+var wrap=h("div",{class:"vup"}),fi=h("input",{type:"file",accept:"video/*",hidden:true}),
+pg=h("div",{class:"pg",hidden:true},[h("i")]),vs=h("div",{class:"vs"});
+var has=e.v&&isUp(e.v);
+var pick=h("button",{class:"sm",type:"button",text:has?"Trocar vídeo":"Enviar vídeo da galeria",onclick:function(){fi.click()}});
+var row=h("div",{class:"vr"},[pick]);
+if(has)row.appendChild(h("button",{class:"sm danger",type:"button",text:"Remover vídeo",onclick:function(){e.v="";mark();editor(box)}}));
+wrap.appendChild(row);wrap.appendChild(fi);wrap.appendChild(pg);wrap.appendChild(vs);
+if(has)wrap.appendChild(h("video",{src:e.v,controls:true,playsinline:true,preload:"metadata"}));
+else vs.textContent="Escolha um vídeo curto da sua galeria (até 100 MB). Os alunos assistem dentro do app.";
+fi.onchange=function(){
+var f=fi.files[0];fi.value="";if(!f)return;
+if(f.type.indexOf("video/")!==0){toast("Escolha um arquivo de vídeo.");return}
+if(f.size>100*1024*1024){toast("Vídeo muito grande (máx. 100 MB). Use um vídeo mais curto.");return}
+if(CLD_NAME.indexOf("COLE_")===0){toast("Falta configurar o Cloudinary no admin.html.");return}
+var fd=new FormData();fd.append("file",f);fd.append("upload_preset",CLD_PRESET);fd.append("folder","treinos");
+var xhr=new XMLHttpRequest();
+xhr.open("POST","https://api.cloudinary.com/v1_1/"+CLD_NAME+"/video/upload");
+e._up=true;pick.disabled=true;pg.hidden=false;vs.textContent="Enviando... 0%";
+function fail(m){e._up=false;pick.disabled=false;pg.hidden=true;vs.textContent="Falha no envio. "+(m||"Tente de novo.");toast("Não foi possível enviar o vídeo.")}
+xhr.upload.onprogress=function(ev){if(ev.lengthComputable){var p=Math.round(ev.loaded/ev.total*100);pg.firstChild.style.width=p+"%";vs.textContent="Enviando... "+p+"% (não feche esta tela)"}};
+xhr.onerror=function(){fail("Verifique a internet.")};
+xhr.onload=function(){var r={};try{r=JSON.parse(xhr.responseText)}catch(x){}
+if(xhr.status>=200&&xhr.status<300&&r.secure_url){e._up=false;e.v=r.secure_url;mark();toast("Vídeo enviado! Clique em Salvar treinos.");try{editor(box)}catch(x){}}
+else fail((r.error&&r.error.message)||"Código "+xhr.status)};
+xhr.send(fd)};
+return wrap}
 
 function save(){
+if(ed.some(function(w){return w.ex.some(function(e){return e._up})})){toast("Aguarde o envio do vídeo terminar.");return}
 if(mode==="lib")return saveLib();
 var a=find(cur),btn=$("sbBtn");btn.disabled=true;btn.textContent="Salvando...";
 ed.forEach(function(w){w.ex=w.ex.filter(function(e){return e.nm.trim()})});
