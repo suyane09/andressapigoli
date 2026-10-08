@@ -164,6 +164,10 @@ label.f>input,label.f>select,label.f>textarea{margin-top:5px;text-transform:none
 #mdl .acts2{display:flex;gap:10px;justify-content:flex-end;margin-top:22px;flex-wrap:wrap}
 #mdl .btn.danger{background:var(--red);color:#fff}
 #mdl .btn.danger:hover{background:#8a2a2a}
+.mnav{display:flex;gap:8px}.top .mnav .sm.on{background:var(--nude);color:var(--ink);border-color:var(--nude)}
+.app.solo{grid-template-columns:1fr}.app.solo .side{display:none}.app.solo .main{display:block!important;max-width:900px;margin:0 auto;width:100%}.app.solo .savebar{left:0}
+.libbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:14px}.libbar select{flex:1;min-width:160px}
+.newlink{font-size:.85rem;color:var(--muted)}.newlink a{text-decoration:underline}
 </style>
 </head>
 <body>
@@ -183,12 +187,12 @@ label.f>input,label.f>select,label.f>textarea{margin-top:5px;text-transform:none
 <div id="vApp" hidden>
 <header class="top">
 <div class="tl"><div class="logo"><b>AP</b><span>Painel</span></div><span class="script">Painel da Andressa</span></div>
+<nav class="mnav"><button class="sm on" id="nvLib" type="button">Meus treinos</button><button class="sm" id="nvAlu" type="button">Alunos</button></nav>
 <button class="sm" id="sair" type="button">Sair</button>
 </header>
 <div class="app" id="app">
 <aside class="side">
-<div class="new"><input id="nNome" placeholder="Nome do novo aluno" maxlength="80"><button class="btn" id="nAdd" type="button">Cadastrar</button></div>
-<div id="nMsg" role="status"></div>
+<p class="newlink">Novos alunos são cadastrados na <a href="aluno.html">Área do aluno</a> e aparecem aqui sozinhos.</p>
 <input id="busca" type="search" placeholder="Buscar aluno">
 <div id="lista"></div>
 </aside>
@@ -220,7 +224,7 @@ var db=firebase.firestore(),auth=firebase.auth();
 var $=function(i){return document.getElementById(i)};
 function h(tag,props,kids){var e=document.createElement(tag);for(var k in (props||{})){var v=props[k];if(k==="class")e.className=v;else if(k==="text")e.textContent=v;else if(k.slice(0,2)==="on")e[k]=v;else if(v!==undefined&&v!==null&&v!==false)e.setAttribute(k,v===true?"":v)}(kids||[]).forEach(function(c){if(c)e.appendChild(typeof c==="string"?document.createTextNode(c):c)});return e}
 
-var ALU=[],cur=null,tab="treinos",ed=[],sel=0,dirty=false,Q="";
+var mode="lib",LIB=[],ALU=[],cur=null,tab="treinos",ed=[],sel=0,dirty=false,Q="";
 
 function ask(o,ok){var m=$("mdl");$("mdlT").textContent=o.titulo;$("mdlP").textContent=o.texto;$("mdlYes").textContent=o.botao||"Excluir";
 function close(){m.className="";document.removeEventListener("keydown",key)}
@@ -246,20 +250,23 @@ $("lgGo").onclick=login;
 $("lgPass").onkeydown=function(e){if(e.key==="Enter")login()};
 $("lgMail").onkeydown=function(e){if(e.key==="Enter")$("lgPass").focus()};
 $("sair").onclick=function(){if(dirty&&!confirm("Há alterações não salvas. Sair mesmo assim?"))return;dirty=false;cur=null;auth.signOut()};
-auth.onAuthStateChanged(function(u){$("vLogin").hidden=!!u;$("vApp").hidden=!u;if(u)loadAll()});
+auth.onAuthStateChanged(function(u){$("vLogin").hidden=!!u;$("vApp").hidden=!u;if(u)loadAll();else if(unsub){unsub();unsub=null}});
 addEventListener("beforeunload",function(e){if(dirty){e.preventDefault();e.returnValue=""}});
 
 /* ---------- lista de alunos ---------- */
+var unsub=null,first=true;
 function loadAll(){
 $("lista").textContent="Carregando...";
-db.collection("alunos").orderBy("criado","desc").get().then(function(q){
+loadLib();setMode("lib",true);
+if(unsub)unsub();first=true;
+unsub=db.collection("alunos").orderBy("criado","desc").onSnapshot(function(q){
 ALU=q.docs.map(norm);renderList();
-if(cur&&find(cur)){}else cur=null;renderMain()
-}).catch(function(e){$("lista").textContent="Não foi possível carregar os alunos ("+(e.code||"erro")+"). Confira as regras do Firestore e se este e-mail é o da Andressa."})}
+if(first){first=false;if(!(cur&&find(cur)))cur=null;if(mode==="alu")renderMain()}
+},function(e){$("lista").textContent="Não foi possível carregar os alunos ("+(e.code||"erro")+"). Confira as regras do Firestore e se este e-mail é o da Andressa."})}
 function renderList(){
 var box=$("lista");box.innerHTML="";var q=Q.toLowerCase();
 var L=ALU.filter(function(a){return !q||a.nome.toLowerCase().indexOf(q)>-1});
-if(!L.length){box.appendChild(h("p",{class:"empty",text:ALU.length?"Nenhum aluno encontrado.":"Nenhum aluno cadastrado ainda."}));return}
+if(!L.length){box.appendChild(h("p",{class:"empty",text:ALU.length?"Nenhum aluno encontrado.":"Nenhum aluno ainda. Cadastre na Área do aluno."}));return}
 L.forEach(function(a){var n=a.treinos.length;
 box.appendChild(h("button",{class:"item"+(a.id===cur?" on":""),type:"button",onclick:function(){pick(a.id)}},[avatar(a),h("div",{class:"it"},[h("b",{text:a.nome}),h("small",{text:n?n+(n>1?" treinos":" treino"):"Sem treino montado"})])]))})}
 $("busca").oninput=function(){Q=this.value;renderList()};
@@ -272,15 +279,6 @@ function pick(id){
 if(id!==cur&&dirty&&!confirm("Há alterações não salvas neste aluno. Trocar mesmo assim?"))return;
 cur=id;tab="treinos";buildEd();$("app").classList.add("detail");renderList();renderMain();scrollTo(0,0)}
 
-$("nAdd").onclick=function(){
-var n=$("nNome").value.trim();if(!n)return;var c=gen(),o={nome:n,criado:Date.now(),treinos:[],perfil:{},cargas:{}};
-$("nAdd").disabled=true;
-db.collection("alunos").doc(c).set(o).then(function(){
-$("nNome").value="";o.id=c;ALU.unshift(o);
-$("nMsg").innerHTML="";$("nMsg").appendChild(document.createTextNode("Aluno cadastrado! Código de "+n+": "));$("nMsg").appendChild(h("b",{text:fc(c)}));
-dirty=false;pick(c);toast("Aluno cadastrado! Agora monte o treino.")
-}).catch(function(){$("nMsg").textContent="Não foi possível cadastrar. Tente de novo."}).then(function(){$("nAdd").disabled=false})};
-$("nNome").onkeydown=function(e){if(e.key==="Enter")$("nAdd").click()};
 
 /* ---------- painel do aluno ---------- */
 function waLink(a){
@@ -289,7 +287,7 @@ var msg="Olá, "+a.nome.split(" ")[0]+"! Seu app de treinos está pronto. Toque 
 return"https://wa.me/?text="+encodeURIComponent(msg)}
 function renderMain(){
 var m=$("main");m.innerHTML="";var a=cur&&find(cur);
-if(!a){$("app").classList.remove("detail");m.appendChild(h("div",{class:"blank"},[h("div",{class:"script",text:"Selecione um aluno"}),h("p",{text:"Escolha alguém na lista ou cadastre um novo aluno para montar o treino."})]));return}
+if(!a){$("app").classList.remove("detail");m.appendChild(h("div",{class:"blank"},[h("div",{class:"script",text:"Selecione um aluno"}),h("p",{text:"Escolha um aluno na lista para montar o treino dele ou usar um treino da sua biblioteca."})]));return}
 m.appendChild(h("button",{class:"sm back",type:"button",text:"← Alunos",onclick:function(){if(dirty&&!confirm("Há alterações não salvas. Voltar mesmo assim?"))return;dirty=false;cur=null;renderList();renderMain()}}));
 var cp=h("button",{class:"sm",type:"button",text:"Copiar código",onclick:function(){try{navigator.clipboard.writeText(fc(a.id))}catch(e){}toast("Código copiado: "+fc(a.id))}});
 m.appendChild(h("div",{class:"phead"},[avatar(a,"lg"),h("div",{class:"nm"},[h("h2",{text:a.nome}),h("span",{class:"code",text:fc(a.id)})]),
@@ -299,7 +297,7 @@ var tabs=h("div",{class:"tabs",role:"tablist"});
 tabs.appendChild(h("button",{class:tab===t[0]?"on":"",type:"button",role:"tab",text:t[1],onclick:function(){if(tab===t[0])return;tab=t[0];renderMain()}}))});
 m.appendChild(tabs);
 var body=h("div",{id:"body"});m.appendChild(body);
-if(tab==="treinos"){editor(body);m.appendChild(h("div",{class:"savebar"},[h("span",{id:"sbStat"}),h("button",{class:"btn",id:"sbBtn",type:"button",text:"Salvar treinos",onclick:save})]));stat()}
+if(tab==="treinos"){if(LIB.length)m.insertBefore(libBar(body),body);editor(body);m.appendChild(h("div",{class:"savebar"},[h("span",{id:"sbStat"}),h("button",{class:"btn",id:"sbBtn",type:"button",text:"Salvar treinos",onclick:save})]));stat()}
 else if(tab==="dados")dados(body,a);else evolucao(body,a)}
 function del(a){
 ask({titulo:"Excluir "+a.nome+"?",texto:"Os treinos e o histórico de cargas deste aluno serão apagados. Essa ação não pode ser desfeita.",botao:"Sim, excluir"},function(){
@@ -322,14 +320,14 @@ ed.forEach(function(w,i){chips.appendChild(h("button",{class:"chip"+(i===sel?" o
 chips.appendChild(h("button",{class:"chip add",type:"button",text:"+ Novo treino",onclick:function(){var L="ABCDEFGHIJ";ed.push({n:"Treino "+(L.charAt(ed.length)||(ed.length+1)),f:"",ex:[]});sel=ed.length-1;mark();editor(box)}}));
 box.appendChild(chips);
 var w=ed[sel];
-if(!w){box.appendChild(h("div",{class:"blank"},[h("div",{class:"script",text:"Nenhum treino ainda"}),h("p",{text:"Clique em “+ Novo treino” para começar a montar a ficha deste aluno."})]));return}
+if(!w){box.appendChild(h("div",{class:"blank"},[h("div",{class:"script",text:"Nenhum treino ainda"}),h("p",{text:"Clique em “+ Novo treino” para começar a montar "+(mode==="lib"?"seus treinos.":"a ficha deste aluno.")})]));return}
 var nameIn=txt(w.n,"Ex.: Treino A",40,function(v){w.n=v;chips.children[sel].textContent=v||("Treino "+(sel+1))});
 var wk=h("div",{class:"wk"},[h("div",{class:"g"},[fld("Nome do treino",nameIn),fld("Foco / grupos musculares",txt(w.f,"Ex.: Inferiores e core",80,function(v){w.f=v}))])]);
 var tools=h("div",{class:"tools"});
 tools.appendChild(h("button",{class:"sm",type:"button",text:"← Mover",disabled:sel===0,onclick:function(){swap(ed,sel,sel-1);sel--;mark();editor(box)}}));
 tools.appendChild(h("button",{class:"sm",type:"button",text:"Mover →",disabled:sel===ed.length-1,onclick:function(){swap(ed,sel,sel+1);sel++;mark();editor(box)}}));
 tools.appendChild(h("button",{class:"sm",type:"button",text:"Duplicar treino",onclick:function(){var c={n:w.n+" (cópia)",f:w.f,ex:w.ex.map(function(e){return{nm:e.nm,s:e.s,r:e.r,d:e.d,o:e.o,v:e.v,_k:null}})};ed.splice(sel+1,0,c);sel++;mark();editor(box)}}));
-tools.appendChild(h("button",{class:"sm danger",type:"button",text:"Excluir treino",onclick:function(){ask({titulo:"Excluir “"+(w.n||"este treino")+"”?",texto:"Os exercícios deste treino serão removidos, e o histórico de cargas deles também será apagado ao salvar.",botao:"Sim, excluir"},function(){ed.splice(sel,1);sel=Math.max(0,sel-1);mark();editor(box)})}}));
+tools.appendChild(h("button",{class:"sm danger",type:"button",text:"Excluir treino",onclick:function(){ask({titulo:"Excluir “"+(w.n||"este treino")+"”?",texto:mode==="lib"?"Os exercícios deste treino serão removidos da sua biblioteca ao salvar.":"Os exercícios deste treino serão removidos, e o histórico de cargas deles também será apagado ao salvar.",botao:"Sim, excluir"},function(){ed.splice(sel,1);sel=Math.max(0,sel-1);mark();editor(box)})}}));
 wk.appendChild(tools);box.appendChild(wk);
 var list=h("div",{class:"exs"});
 w.ex.forEach(function(e,j){list.appendChild(exCard(w,e,j,box))});
@@ -354,6 +352,7 @@ fld("Observação / execução",txt(e.o,"Ex.: Joelhos alinhados com os pés",200
 fld("Link do vídeo (opcional)",txt(e.v,"https://...",300,function(v){e.v=v}))])])}
 
 function save(){
+if(mode==="lib")return saveLib();
 var a=find(cur),btn=$("sbBtn");btn.disabled=true;btn.textContent="Salvando...";
 ed.forEach(function(w){w.ex=w.ex.filter(function(e){return e.nm.trim()})});
 var clean=ed.map(function(w){return{n:w.n.trim()||"Treino",f:w.f.trim(),ex:w.ex.map(function(e){
@@ -368,6 +367,40 @@ a.treinos=clean;a.cargas=neu;
 ed.forEach(function(w,i){w.ex.forEach(function(e,j){e._k=i+"_"+j})});
 dirty=false;renderList();if(sel>=ed.length)sel=Math.max(0,ed.length-1);renderMain();toast("Treinos salvos! Já aparecem para o aluno.")})
 }).catch(function(e){btn.disabled=false;btn.textContent="Salvar treinos";toast("Erro ao salvar ("+(e.code||"tente de novo")+").")})}
+
+/* ---------- biblioteca "Meus treinos" ---------- */
+function copyW(w){return{n:w.n||"",f:w.f||"",ex:(w.ex||[]).map(function(e){var d=parseInt(e.d);return{nm:e.nm||"",s:String(e.s||"3"),r:String(e.r||"12"),d:isNaN(d)?60:d,o:e.o||"",v:e.v||"",_k:null}})}}
+function loadLib(){db.collection("modelos").doc("biblioteca").get().then(function(s){LIB=(s.exists&&s.data().treinos)||[];if(mode==="lib"&&!dirty){buildLib();renderLib()}}).catch(function(){toast("Não foi possível carregar sua biblioteca (confira as regras do Firestore).")})}
+function buildLib(){ed=LIB.map(copyW);dirty=false;sel=0}
+function renderLib(){
+var m=$("main");m.innerHTML="";
+m.appendChild(h("div",{class:"phead"},[h("div",{class:"nm"},[h("h2",{text:"Meus treinos"}),h("p",{class:"newlink",text:"Monte aqui os seus treinos e exercícios. Depois, na aba Alunos, escolha o aluno e adicione estes treinos à ficha dele."})])]));
+var body=h("div",{id:"body"});m.appendChild(body);editor(body);
+m.appendChild(h("div",{class:"savebar"},[h("span",{id:"sbStat"}),h("button",{class:"btn",id:"sbBtn",type:"button",text:"Salvar treinos",onclick:save})]));stat()}
+function saveLib(){
+var btn=$("sbBtn");btn.disabled=true;btn.textContent="Salvando...";
+ed.forEach(function(w){w.ex=w.ex.filter(function(e){return e.nm.trim()})});
+var clean=ed.map(function(w){return{n:w.n.trim()||"Treino",f:w.f.trim(),ex:w.ex.map(function(e){
+var o={nm:e.nm.trim(),s:String(e.s).trim()||"3",r:String(e.r).trim()||"12",d:e.d||0,o:e.o.trim()},v=e.v.trim();
+if(v)o.v=/^https?:\/\//i.test(v)?v:"https://"+v;return o})}});
+db.collection("modelos").doc("biblioteca").set({treinos:clean}).then(function(){
+LIB=clean;dirty=false;if(sel>=ed.length)sel=Math.max(0,ed.length-1);renderLib();toast("Treinos salvos na sua biblioteca!")
+}).catch(function(e){btn.disabled=false;btn.textContent="Salvar treinos";toast("Erro ao salvar ("+(e.code||"tente de novo")+").")})}
+function libBar(body){
+var s=h("select",{"aria-label":"Treino da biblioteca"});
+LIB.forEach(function(w,i){s.appendChild(h("option",{value:i,text:w.n||("Treino "+(i+1))}))});
+return h("div",{class:"libbar"},[h("small",{text:"Da minha biblioteca:"}),s,h("button",{class:"sm",type:"button",text:"+ Adicionar ao aluno",onclick:function(){
+var w=LIB[+s.value];if(!w)return;ed.push(copyW(w));sel=ed.length-1;mark();editor(body);toast("Treino adicionado. Clique em Salvar treinos.")}})])}
+function setMode(m,f){
+if(m===mode&&!f)return;
+if(dirty&&!confirm("Há alterações não salvas. Trocar mesmo assim?"))return;
+dirty=false;mode=m;cur=null;
+$("nvLib").className="sm"+(m==="lib"?" on":"");$("nvAlu").className="sm"+(m==="alu"?" on":"");
+var app=$("app");
+if(m==="lib"){app.classList.add("solo");app.classList.remove("detail");buildLib();renderLib()}
+else{app.classList.remove("solo");renderList();renderMain()}
+scrollTo(0,0)}
+$("nvLib").onclick=function(){setMode("lib")};$("nvAlu").onclick=function(){setMode("alu")};
 
 /* ---------- dados e evolução ---------- */
 function tile(l,v,w){return h("div",{class:"tile"+(w?" w":"")},[h("small",{text:l}),h("b",{text:v||"–"})])}

@@ -250,6 +250,17 @@ button.av{padding:0}
 #toast.on{opacity:1;transform:translate(-50%,0)}
 @media(max-width:380px){.sr{grid-template-columns:32px 1fr 76px 40px 44px;gap:6px}.fg{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.pro{min-height:100vh;min-height:100dvh;background:var(--cream);padding:calc(18px + var(--sat)) 18px calc(24px + var(--sab))}
+.pro .w{max-width:640px;margin:0 auto}
+.pro .bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}
+.pro .bar h2{font-family:var(--serif);margin:0}
+.pro .new{display:flex;gap:8px;margin-bottom:8px}
+.pro .new input{flex:1;min-width:0;border:1px solid var(--line);background:#fff;font:inherit;border-radius:999px;padding:12px 18px}
+.pro .msg{min-height:1.4em;font-size:.9rem;color:var(--ok);margin-bottom:10px}
+.pro .al{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px}
+.pro .al b{display:block}.pro .al .cd{font-family:var(--serif);letter-spacing:.2em;color:var(--muted)}
+.pro .al .ac{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+#vProLogin input{text-transform:none;letter-spacing:normal;font-size:1rem;font-family:inherit;margin-bottom:10px;width:100%;box-sizing:border-box}
 </style>
 </head>
 <body>
@@ -284,8 +295,32 @@ button.av{padding:0}
 <button class="btn" id="lgGo" type="button">Entrar</button>
 <p class="err" id="lgErr" role="alert"></p>
 <p class="help">Ainda não tem código? <a class="wpp" href="#">Peça no WhatsApp</a></p>
+<p class="help"><a href="#" id="goPro">Sou a Andressa (acesso do personal)</a></p>
 </div>
 </div>
+
+<!-- LOGIN DO PERSONAL -->
+<div class="login" id="vProLogin" hidden>
+<a class="site" href="#" id="proBack"><svg class="i"><use href="#ic-left"/></svg>Voltar</a>
+<div class="in">
+<div class="logo"><b>AP</b><span>Andressa Pigoli<small>PERSONAL</small></span></div>
+<h1>Acesso da Andressa</h1>
+<p class="sub">Entre para cadastrar seus alunos e gerar o código de cada um.</p>
+<input id="pMail" type="email" autocomplete="username" placeholder="E-mail">
+<input id="pPass" type="password" autocomplete="current-password" placeholder="Senha">
+<button class="btn" id="pGo" type="button">Entrar</button>
+<p class="err" id="pErr" role="alert"></p>
+</div>
+</div>
+
+<!-- PERSONAL: CADASTRO DE ALUNOS -->
+<div class="pro" id="vPro" hidden><div class="w">
+<div class="bar"><h2>Meus alunos</h2><button class="sm" id="pSair" type="button">Sair</button></div>
+<div class="new"><input id="pNome" placeholder="Nome do novo aluno" maxlength="80"><button class="btn" id="pAdd" type="button">Cadastrar</button></div>
+<div class="msg" id="pMsg" role="status"></div>
+<div id="pLista"></div>
+<p style="text-align:center;margin-top:18px"><a class="btn dark" href="admin.html">Montar treinos →</a></p>
+</div></div>
 
 <!-- APP -->
 <div class="shell" id="vApp" hidden>
@@ -321,6 +356,7 @@ var CFG={
 var WHATSAPP="556992903002";
 var db=null;
 try{firebase.initializeApp(CFG);db=firebase.firestore()}catch(e){}
+var auth=null;try{auth=firebase.auth()}catch(e){}
 
 var $=function(i){return document.getElementById(i)};
 function h(tag,props,kids){var e=document.createElement(tag);for(var k in (props||{})){var v=props[k];if(k==="class")e.className=v;else if(k==="text")e.textContent=v;else if(k.slice(0,2)==="on")e[k]=v;else if(v!==undefined&&v!==null&&v!==false)e.setAttribute(k,v===true?"":v)}(kids||[]).forEach(function(c){if(c)e.appendChild(typeof c==="string"?document.createTextNode(c):c)});return e}
@@ -357,7 +393,7 @@ function setsDone(j){var e=al.treinos[W.ti].ex[j],c=0;for(var k=0;k<nSets(e);k++
 function prevKg(ti,j){var a=(al.cargas[ti+"_"+j]||[]).filter(function(x){return x.d!==today()});return a.length?a[a.length-1].kg:null}
 
 /* ---------- login ---------- */
-function showLogin(msg){$("vApp").hidden=true;$("vWork").hidden=true;$("vLogin").hidden=false;$("lgErr").textContent=msg||""}
+function showLogin(msg){$("vProLogin").hidden=true;$("vPro").hidden=true;$("vApp").hidden=true;$("vWork").hidden=true;$("vLogin").hidden=false;$("lgErr").textContent=msg||""}
 function enter(raw,quiet){
 var c=clean(raw);
 if(!db){if(!quiet)$("lgErr").textContent="O app ainda não foi configurado.";return}
@@ -366,7 +402,7 @@ $("lgErr").textContent=quiet?"":"Entrando...";$("lgGo").disabled=true;
 ref0(c).get().then(function(s){
 if(!s.exists){st("ap_code",null);showLogin(quiet?"":"Código não encontrado. Confira e tente novamente.");return}
 code=c;al=s.data();al.nome=al.nome||"Aluno";al.perfil=al.perfil||{};al.cargas=al.cargas||{};al.treinos=al.treinos||[];
-st("ap_code",c);W=loadW();tab="home";
+st("ap_code",c);st("ap_pro",null);W=loadW();tab="home";
 $("vLogin").hidden=true;$("vApp").hidden=false;go("home")
 }).catch(function(){showLogin(quiet?"":"Não foi possível acessar agora. Tente de novo.")}).then(function(){$("lgGo").disabled=false})}
 function ref0(c){return db.collection("alunos").doc(c)}
@@ -374,6 +410,43 @@ $("lgGo").onclick=function(){enter($("lgCode").value)};
 $("lgCode").oninput=function(){var v=clean(this.value).slice(0,8);this.value=v.length>4?v.slice(0,4)+"-"+v.slice(4):v};
 $("lgCode").onkeydown=function(e){if(e.key==="Enter")enter(this.value)};
 function logout(){st("ap_code",null);stopWork();al=null;code="";W=null;$("lgCode").value="";showLogin("")}
+
+/* ---------- área da personal (cadastro de alunos) ---------- */
+var PL=[];
+function gen(){var A="ABCDEFGHJKLMNPQRSTUVWXYZ23456789",b=new Uint8Array(8),o="";crypto.getRandomValues(b);for(var i=0;i<8;i++)o+=A[b[i]%32];return o}
+function hideAll(){["vApp","vWork","vLogin","vProLogin","vPro"].forEach(function(i){$(i).hidden=true})}
+function showPro(){
+if(!auth){showLogin("O app ainda não foi configurado.");return}
+st("ap_pro","1");hideAll();
+if(auth.currentUser){$("vPro").hidden=false;loadPro()}else{$("vProLogin").hidden=false;$("pErr").textContent=""}}
+function proLogin(){
+$("pErr").textContent="";$("pGo").disabled=true;
+auth.signInWithEmailAndPassword($("pMail").value.trim(),$("pPass").value).then(function(){$("pPass").value=""}).catch(function(e){
+var bad=["auth/invalid-login-credentials","auth/invalid-credential","auth/wrong-password","auth/user-not-found"];
+$("pErr").textContent=bad.indexOf(e.code)>-1?"E-mail ou senha incorretos.":e.code==="auth/invalid-email"?"E-mail inválido.":e.code==="auth/too-many-requests"?"Muitas tentativas. Aguarde alguns minutos.":"Erro ao entrar ("+e.code+")."}).then(function(){$("pGo").disabled=false})}
+function loadPro(){
+$("pLista").textContent="Carregando...";
+db.collection("alunos").orderBy("criado","desc").get().then(function(q){PL=q.docs.map(function(d){var x=d.data();x.id=d.id;return x});renderPro()}).catch(function(e){$("pLista").textContent="Não foi possível carregar os alunos ("+(e.code||"erro")+"). Confira se este e-mail é o da Andressa."})}
+function renderPro(){
+var b=$("pLista");b.innerHTML="";
+if(!PL.length){b.appendChild(h("p",{class:"muted",text:"Nenhum aluno cadastrado ainda."}));return}
+PL.forEach(function(a){
+var msg="Olá, "+(a.nome||"").split(" ")[0]+"! Seu app de treinos está pronto. Toque no link para entrar: "+new URL("./aluno.html",location.href).href+"?c="+a.id+" (seu código de acesso: "+fc(a.id)+")";
+b.appendChild(h("div",{class:"al"},[h("b",{text:a.nome||"Aluno"}),h("span",{class:"cd",text:fc(a.id)}),h("div",{class:"ac"},[
+h("button",{class:"sm",type:"button",text:"Copiar código",onclick:function(){try{navigator.clipboard.writeText(fc(a.id))}catch(e){}toast("Código copiado: "+fc(a.id))}}),
+h("a",{class:"sm",href:"https://wa.me/?text="+encodeURIComponent(msg),target:"_blank",rel:"noopener",text:"Enviar no WhatsApp"})])]))})}
+$("pAdd").onclick=function(){
+var n=$("pNome").value.trim();if(!n)return;
+var c=gen(),o={nome:n,criado:Date.now(),treinos:[],perfil:{},cargas:{}};
+$("pAdd").disabled=true;
+db.collection("alunos").doc(c).set(o).then(function(){$("pNome").value="";o.id=c;PL.unshift(o);renderPro();$("pMsg").textContent="Aluno cadastrado! Código de "+n+": "+fc(c)+". Ele já aparece no seu painel de treinos."}).catch(function(){$("pMsg").textContent="Não foi possível cadastrar. Tente de novo."}).then(function(){$("pAdd").disabled=false})};
+$("pNome").onkeydown=function(e){if(e.key==="Enter")$("pAdd").click()};
+$("pGo").onclick=proLogin;$("pPass").onkeydown=function(e){if(e.key==="Enter")proLogin()};
+$("pMail").onkeydown=function(e){if(e.key==="Enter")$("pPass").focus()};
+$("goPro").onclick=function(e){e.preventDefault();showPro()};
+$("proBack").onclick=function(e){e.preventDefault();st("ap_pro",null);showLogin("")};
+$("pSair").onclick=function(){st("ap_pro",null);auth.signOut().then(function(){showLogin("")})};
+if(auth)auth.onAuthStateChanged(function(){if(st("ap_pro")==="1")showPro()});
 
 /* ---------- navegação ---------- */
 function go(t){tab=t;
@@ -616,7 +689,8 @@ h("div",{class:"acts"},[h("a",{class:"btn",href:wa(msg),target:"_blank",rel:"noo
 /* ---------- início ---------- */
 var link=new URLSearchParams(location.search).get("c")||(location.hash.length>1?location.hash.slice(1):"");
 if(!db){showLogin("O app ainda não foi configurado.")}
-else if(clean(link).length===8){try{history.replaceState(null,"",location.pathname)}catch(e){}$("lgCode").value=fc(clean(link));showLogin("");enter(link)}
+else if(clean(link).length===8){st("ap_pro",null);try{history.replaceState(null,"",location.pathname)}catch(e){}$("lgCode").value=fc(clean(link));showLogin("");enter(link)}
+else if(st("ap_pro")==="1"&&auth){hideAll()}
 else if(st("ap_code")){showLogin("");enter(st("ap_code"),true)}
 else showLogin("");
 
