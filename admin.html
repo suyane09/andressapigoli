@@ -274,7 +274,7 @@ $("busca").oninput=function(){Q=this.value;renderList()};
 function buildEd(){
 var a=find(cur);
 ed=a.treinos.map(function(w,i){return{n:w.n||"",f:w.f||"",ex:(w.ex||[]).map(function(e,j){var d=parseInt(e.d);return{nm:e.nm||"",s:String(e.s||"3"),r:String(e.r||"12"),d:isNaN(d)?60:d,o:e.o||"",v:e.v||"",_k:i+"_"+j}})}});
-dirty=false;sel=0}
+dirty=false;sel=0;base=snap()}
 function pick(id){
 if(id!==cur&&dirty&&!confirm("Há alterações não salvas neste aluno. Trocar mesmo assim?"))return;
 cur=id;tab="treinos";buildEd();$("app").classList.add("detail");renderList();renderMain();scrollTo(0,0)}
@@ -305,7 +305,10 @@ db.collection("alunos").doc(a.id).delete().then(function(){ALU=ALU.filter(functi
 
 /* ---------- editor de treinos ---------- */
 function stat(){var s=$("sbStat");if(!s)return;s.className=dirty?"dirty":"";s.textContent=dirty?"Alterações não salvas":"Tudo salvo"}
-function mark(){dirty=true;stat()}
+/* "base" guarda o estado salvo; só há alteração se o editor for diferente dele */
+var base="[]";
+function snap(){return JSON.stringify(ed.map(function(w){return{n:w.n,f:w.f,ex:w.ex.map(function(e){return{nm:e.nm,s:e.s,r:e.r,d:e.d,o:e.o,v:e.v}})}}))}
+function mark(){dirty=snap()!==base;stat()}
 function swap(arr,i,j){var t=arr[i];arr[i]=arr[j];arr[j]=t}
 function fld(label,input){var l=h("label",{class:"f"},[label]);l.appendChild(input);return l}
 function txt(val,ph,max,fn,list){var i=h("input",{type:"text",value:val,placeholder:ph||"",maxlength:max||120,oninput:function(){fn(this.value);mark()}});if(list)i.setAttribute("list",list);return i}
@@ -365,13 +368,13 @@ ed.forEach(function(w,i){w.ex.forEach(function(e,j){if(e._k&&old[e._k])neu[i+"_"
 return ref.update({treinos:clean,cargas:neu}).then(function(){
 a.treinos=clean;a.cargas=neu;
 ed.forEach(function(w,i){w.ex.forEach(function(e,j){e._k=i+"_"+j})});
-dirty=false;renderList();if(sel>=ed.length)sel=Math.max(0,ed.length-1);renderMain();toast("Treinos salvos! Já aparecem para o aluno.")})
+dirty=false;base=snap();renderList();if(sel>=ed.length)sel=Math.max(0,ed.length-1);renderMain();toast("Treinos salvos! Já aparecem para o aluno.")})
 }).catch(function(e){btn.disabled=false;btn.textContent="Salvar treinos";toast("Erro ao salvar ("+(e.code||"tente de novo")+").")})}
 
 /* ---------- biblioteca "Meus treinos" ---------- */
 function copyW(w){return{n:w.n||"",f:w.f||"",ex:(w.ex||[]).map(function(e){var d=parseInt(e.d);return{nm:e.nm||"",s:String(e.s||"3"),r:String(e.r||"12"),d:isNaN(d)?60:d,o:e.o||"",v:e.v||"",_k:null}})}}
 function loadLib(){db.collection("modelos").doc("biblioteca").get().then(function(s){LIB=(s.exists&&s.data().treinos)||[];if(mode==="lib"&&!dirty){buildLib();renderLib()}}).catch(function(){toast("Não foi possível carregar sua biblioteca (confira as regras do Firestore).")})}
-function buildLib(){ed=LIB.map(copyW);dirty=false;sel=0}
+function buildLib(){ed=LIB.map(copyW);dirty=false;sel=0;base=snap()}
 function renderLib(){
 var m=$("main");m.innerHTML="";
 m.appendChild(h("div",{class:"phead"},[h("div",{class:"nm"},[h("h2",{text:"Meus treinos"}),h("p",{class:"newlink",text:"Monte aqui os seus treinos e exercícios. Depois, na aba Alunos, escolha o aluno e adicione estes treinos à ficha dele."})])]));
@@ -384,7 +387,7 @@ var clean=ed.map(function(w){return{n:w.n.trim()||"Treino",f:w.f.trim(),ex:w.ex.
 var o={nm:e.nm.trim(),s:String(e.s).trim()||"3",r:String(e.r).trim()||"12",d:e.d||0,o:e.o.trim()},v=e.v.trim();
 if(v)o.v=/^https?:\/\//i.test(v)?v:"https://"+v;return o})}});
 db.collection("modelos").doc("biblioteca").set({treinos:clean}).then(function(){
-LIB=clean;dirty=false;if(sel>=ed.length)sel=Math.max(0,ed.length-1);renderLib();toast("Treinos salvos na sua biblioteca!")
+LIB=clean;dirty=false;base=snap();if(sel>=ed.length)sel=Math.max(0,ed.length-1);renderLib();toast("Treinos salvos na sua biblioteca!")
 }).catch(function(e){btn.disabled=false;btn.textContent="Salvar treinos";toast("Erro ao salvar ("+(e.code||"tente de novo")+").")})}
 function libBar(body){
 var s=h("select",{"aria-label":"Treino da biblioteca"});
