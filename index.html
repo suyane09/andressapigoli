@@ -452,9 +452,11 @@ img,svg{max-width:100%}
 //     allow update: if adm() || request.resource.data.diff(resource.data).affectedKeys().hasOnly(['perfil','cargas']); } } }
 (function(){
 var CFG={
-  apiKey:"AIzaSyC-8N9WGdi6ygH7Ll-Tudicjl1VZynlmc",
+  apiKey:"AIzaSyC-8N9WGdi6yghG7ll-TudiCjl1VZynlmc",
   authDomain:"andressa-pigoli.firebaseapp.com",
   projectId:"andressa-pigoli",
+  storageBucket:"andressa-pigoli.firebasestorage.app",
+  messagingSenderId:"1046816637938",
   appId:"1:1046816637938:web:c40449c3f63ac1588b616b"
 };
 var db=null,auth=null,usr=null,code="",al=null,ti=0,tm=null;
@@ -561,7 +563,7 @@ function admin(){show("adApp");g("adNew").textContent="";list()}
 g("adLink").onclick=function(){if(!db){show("trLogin");notReady("trErr");return}usr?admin():show("adLogin")};
 g("adBack").onclick=function(){show(al?"trApp":"trLogin")};
 g("adEnter").onclick=function(){if(!auth){notReady("adErr");return}g("adErr").textContent="";
-auth.signInWithEmailAndPassword(g("adMail").value.trim(),g("adPass").value).then(function(){g("adPass").value="";admin()}).catch(function(){g("adErr").textContent="E-mail ou senha incorretos."})};
+auth.signInWithEmailAndPassword(g("adMail").value.trim(),g("adPass").value).then(function(){g("adPass").value="";admin()}).catch(function(e){console.log(e.code);g("adErr").textContent=(e.code==="auth/invalid-login-credentials"||e.code==="auth/wrong-password"||e.code==="auth/user-not-found"||e.code==="auth/invalid-credential")?"E-mail ou senha incorretos.":"Erro ao entrar ("+e.code+")."})};
 g("adOut").onclick=function(){auth.signOut();show("trLogin")};
 g("adAdd").onclick=function(){var n=g("adNome").value.trim();if(!n)return;var c=gen();
 db.collection("alunos").doc(c).set({nome:n,criado:Date.now(),treinos:[],perfil:{},cargas:{}}).then(function(){g("adNome").value="";g("adNew").textContent="Aluno cadastrado! Código de "+n+": "+fc(c);list()}).catch(function(){g("adNew").textContent="Não foi possível cadastrar. Tente de novo."})};
