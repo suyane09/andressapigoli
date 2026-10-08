@@ -228,7 +228,7 @@ img,svg{max-width:100%}
 @media(max-width:520px){.btn.ghost{margin:12px 0 0}.tr-login{padding:24px 20px}.tr-list li{gap:12px}.tr-list li{flex-wrap:wrap}.tr-rest{margin-left:38px}}
 
 /* ===== painel do aluno e da profissional ===== */
-.tr-in,.tr-fields input,.tr-fields textarea,.tr-adm input,.tr-adm textarea,.tr-login input{font:inherit;font-size:1rem;color:var(--ink)}
+.tr-in,.tr-fields input,.tr-fields textarea,.tr-login input{font:inherit;font-size:1rem;color:var(--ink)}
 .tr-prof{display:grid;grid-template-columns:110px 1fr;gap:24px;background:var(--cream);padding:24px;margin-bottom:26px;border-left:6px solid var(--nude2)}
 .tr-photo{position:relative;width:104px;height:104px;border-radius:50%;background:var(--nude);display:grid;place-items:center;overflow:hidden;cursor:pointer;font-family:var(--serif);font-size:2.4rem;border:3px solid #fff;box-shadow:0 6px 18px rgba(26,22,21,.15)}
 .tr-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -243,19 +243,6 @@ img,svg{max-width:100%}
 .tr-load input{width:96px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#fff}
 .tr-load .tr-rest{min-height:38px}
 .tr-login input{width:100%;padding:14px 18px;border:1px solid var(--line);border-radius:999px;margin-bottom:12px;background:#fff}
-.tr-adm{max-width:860px}
-.ad-add{display:flex;gap:10px;flex-wrap:wrap;background:var(--cream);padding:22px;border-left:6px solid var(--nude2)}
-.ad-add input{flex:1;min-width:200px;padding:14px 18px;border:1px solid var(--line);border-radius:999px;background:#fff}
-.ad-new{margin:14px 0 26px;font-family:var(--serif);color:var(--ink);min-height:1.4em}
-.ad-card{border:1px solid var(--line);padding:18px 20px;margin-bottom:14px;background:#fff}
-.ad-h{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
-.ad-code{font-family:var(--serif);letter-spacing:.14em;background:var(--ink);color:var(--nude);padding:6px 14px;border-radius:999px;font-size:.95rem}
-.ad-act{display:flex;gap:8px;flex-wrap:wrap}
-.ad-act .tr-rest,.ad-act a{display:inline-flex;align-items:center}
-.ad-box{margin-top:14px;font-size:.88rem}
-.ad-box textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;font:.85rem/1.5 ui-monospace,Menlo,monospace;background:var(--paper)}
-.ad-box p{color:var(--muted);margin:6px 0}
-.ad-box h4{font-family:var(--serif);font-weight:400;margin:14px 0 4px}
 @media(max-width:620px){.tr-prof{grid-template-columns:1fr;justify-items:center;padding:20px}.tr-fields{grid-template-columns:1fr;width:100%}}
 </style>
 <script>document.documentElement.classList.add("js")</script>
@@ -323,20 +310,6 @@ img,svg{max-width:100%}
 <div class="tr-timer" id="trTimer" role="timer" aria-live="polite" hidden></div>
 </div>
 
-<div class="tr-login" id="adLogin" hidden>
-<label for="adMail">Área da Andressa</label>
-<input id="adMail" type="email" autocomplete="username" placeholder="E-mail">
-<input id="adPass" type="password" autocomplete="current-password" placeholder="Senha">
-<div class="tr-row"><button class="btn" id="adEnter" type="button">Entrar</button><button class="tr-link" id="adBack" type="button">Voltar</button></div>
-<p class="tr-err" id="adErr" role="alert"></p>
-</div>
-
-<div class="tr-adm" id="adApp" hidden>
-<div class="tr-top"><span class="script">Painel da Andressa</span><button class="tr-link" id="adOut" type="button">Sair</button></div>
-<div class="ad-add"><input id="adNome" placeholder="Nome do novo aluno" maxlength="80"><button class="btn" id="adAdd" type="button">Cadastrar e gerar código</button></div>
-<p class="ad-new" id="adNew" role="status"></p>
-<div id="adList"></div>
-</div>
 </div>
 </section>
 
@@ -433,7 +406,7 @@ img,svg{max-width:100%}
 <div class="wrap">
 <a class="logo" href="#inicio"><b>AP</b><span>Andressa Pigoli<small>PERSONAL</small></span></a>
 <div class="soc"><a href="https://www.instagram.com/andressapigoli.personal" aria-label="Instagram"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.500 6.500h.01"/></svg></a><a class="wpp" href="#" aria-label="WhatsApp"><svg class="i" viewBox="0 0 24 24"><use href="#wa"/></svg></a></div>
-<div class="links"><a href="#inicio">Início</a><a href="#treinos">Meus treinos</a><a href="#sobre">Sobre</a><a href="#servicos">Serviços</a><a href="#depoimentos">Depoimentos</a><a href="#faq">FAQ</a><a href="#contato">Contato</a><a href="#treinos" id="adLink">Área da Andressa</a></div>
+<div class="links"><a href="#inicio">Início</a><a href="#treinos">Meus treinos</a><a href="#sobre">Sobre</a><a href="#servicos">Serviços</a><a href="#depoimentos">Depoimentos</a><a href="#faq">FAQ</a><a href="#contato">Contato</a></div>
 <div class="end">Movimento é vida. E eu estou aqui para te ajudar.</div>
 </div>
 </footer>
@@ -443,7 +416,7 @@ img,svg{max-width:100%}
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script>
-// ===== ÁREA DO ALUNO + PAINEL DA PROFISSIONAL =====
+// ===== ÁREA DO ALUNO (o painel da Andressa fica em admin.html) =====
 // Dados guardados no Firebase (Firestore). Cole abaixo a configuração do seu projeto Firebase.
 // REGRAS do Firestore (troque o e-mail pelo da Andressa):
 // rules_version='2'; service cloud.firestore { match /databases/{d}/documents {
@@ -463,7 +436,7 @@ var db=null,auth=null,usr=null,code="",al=null,ti=0,tm=null;
 function g(i){return document.getElementById(i)}
 function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
 function st(k,v){try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){}return null}
-function show(id){["trLogin","trApp","adLogin","adApp"].forEach(function(x){g(x).hidden=x!=id})}
+function show(id){["trLogin","trApp"].forEach(function(x){g(x).hidden=x!=id})}
 function clean(c){return(c||"").toUpperCase().replace(/[^A-Z0-9]/g,"")}
 function fc(c){return c.slice(0,4)+"-"+c.slice(4)}
 function gen(){var A="ABCDEFGHJKLMNPQRSTUVWXYZ23456789",b=new Uint8Array(8),o="";crypto.getRandomValues(b);for(var i=0;i<8;i++)o+=A[b[i]%32];return o}
@@ -513,7 +486,7 @@ w.ex.forEach(function(e,i){
 var k=ti+"_"+i,li=el("li",dn.indexOf(i)>-1?"ok":""),cb=el("input"),b=el("div","b"),hs=el("div","o"),inp=el("input"),sv=el("button","tr-rest","Salvar carga"),ld=el("div","tr-load"),r=el("button","tr-rest","⏱ "+e.d+"s");
 cb.type="checkbox";cb.checked=dn.indexOf(i)>-1;cb.setAttribute("aria-label","Concluir "+e.nm);
 cb.onchange=function(){var a=done().filter(function(x){return x!=i});if(cb.checked)a.push(i);st(ck(),JSON.stringify(a));li.className=cb.checked?"ok":"";progress()};
-b.appendChild(el("b",null,e.nm));b.appendChild(el("div","m",e.s+" séries × "+e.r+" · descanso "+e.d+"s"));if(e.o)b.appendChild(el("div","o",e.o));
+b.appendChild(el("b",null,e.nm));b.appendChild(el("div","m",e.s+" séries × "+e.r+" · descanso "+e.d+"s"));if(e.o)b.appendChild(el("div","o",e.o));if(e.v&&/^https?:\/\//i.test(e.v)){var vl=el("a","o","▶ Ver vídeo de execução");vl.href=e.v;vl.target="_blank";vl.rel="noopener";vl.style.cssText="display:inline-block;margin-top:6px;text-decoration:underline;color:var(--ink)";b.appendChild(vl)}
 inp.type="number";inp.step="0.5";inp.min="0";inp.placeholder="kg";inp.setAttribute("aria-label","Carga em kg: "+e.nm);
 function hist(){var h=al.cargas[k]||[];hs.textContent=h.length?"Cargas: "+h.slice(-4).reverse().map(function(x){return x.kg+" kg ("+dt(x.d)+")"}).join(" · "):"Nenhuma carga registrada ainda."}
 sv.type="button";sv.onclick=function(){var v=parseFloat(inp.value);if(!(v>=0))return;
@@ -527,46 +500,6 @@ g("trReset").onclick=function(){st(ck(),null);render()};
 g("trEnter").onclick=function(){enter(g("trCode").value)};
 g("trCode").onkeydown=function(e){if(e.key=="Enter")enter(this.value)};
 g("trOut").onclick=function(){st("ap_code",null);stop();al=null;g("trCode").value="";show("trLogin")};
-
-/* ---------- painel da Andressa ---------- */
-function parse(t){var w=[],c=null;t.split("\n").forEach(function(l){l=l.trim();if(!l)return;var p=l.replace(/^#/,"").split("|");
-if(l.charAt(0)=="#"){c={n:p[0].trim(),f:(p[1]||"").trim(),ex:[]};w.push(c)}
-else if(c)c.ex.push({nm:p[0].trim(),s:(p[1]||"3").trim(),r:(p[2]||"12").trim(),d:parseInt(p[3])||60,o:(p[4]||"").trim()})});return w}
-function fmt(w){return w.map(function(t){return"# "+t.n+" | "+(t.f||"")+"\n"+t.ex.map(function(e){return[e.nm,e.s,e.r,e.d,e.o||""].join(" | ")}).join("\n")}).join("\n\n")}
-var EX="# Treino A | Inferiores e core\nAgachamento livre | 3 | 12 | 60 | Joelhos alinhados com os pés\nElevação pélvica | 3 | 15 | 60 | Sem arquear a lombar\n\n# Treino B | Superiores\nRemada curvada | 3 | 12 | 60 | Escápulas juntas no final";
-function card(id,d){
-var c=el("div","ad-card"),h=el("div","ad-h"),ac=el("div","ad-act"),bx=el("div","ad-box");
-h.appendChild(el("b",null,d.nome));h.appendChild(el("span","ad-code",fc(id)));
-function btn(t,f){var b=el("button","tr-rest",t);b.type="button";b.onclick=f;ac.appendChild(b);return b}
-var msg="Olá, "+d.nome.split(" ")[0]+"! Seu acesso aos treinos está pronto. Entre em "+location.href.split("#")[0]+"#treinos e digite o código: "+fc(id);
-btn("Copiar código",function(){try{navigator.clipboard.writeText(fc(id))}catch(e){}this.textContent="Copiado ✓"});
-var wa=el("a","tr-rest","Enviar no WhatsApp");wa.href="https://wa.me/?text="+encodeURIComponent(msg);wa.target="_blank";wa.rel="noopener";ac.appendChild(wa);
-btn("Treinos",function(){
-if(bx.dataset.m=="t"){bx.innerHTML="";bx.dataset.m="";return}bx.dataset.m="t";bx.innerHTML="";
-var ta=el("textarea");ta.rows=12;ta.value=d.treinos&&d.treinos.length?fmt(d.treinos):EX;
-var sv=el("button","btn","Salvar treinos"),ms=el("span");sv.type="button";sv.style.cssText="padding:10px 22px;margin-top:10px";
-sv.onclick=function(){var w=parse(ta.value);ref(id).update({treinos:w}).then(function(){d.treinos=w;ms.textContent=" Salvo! Já aparece para o aluno."}).catch(function(){ms.textContent=" Erro ao salvar."})};
-bx.appendChild(el("p",null,"Uma linha # para cada treino (# Nome | foco). Abaixo, um exercício por linha: nome | séries | repetições | descanso em segundos | observação."));
-bx.appendChild(ta);bx.appendChild(sv);bx.appendChild(ms)});
-btn("Dados e cargas",function(){
-if(bx.dataset.m=="d"){bx.innerHTML="";bx.dataset.m="";return}bx.dataset.m="d";bx.innerHTML="";
-ref(id).get().then(function(s){var x=s.data(),p=x.perfil||{},cg=x.cargas||{};
-bx.appendChild(el("p",null,"Peso: "+(p.peso||"–")+" kg · Altura: "+(p.altura||"–")+" cm · Objetivo: "+(p.objetivo||"–")));
-if(p.obs)bx.appendChild(el("p",null,"Observações: "+p.obs));
-(x.treinos||[]).forEach(function(w,i){w.ex.forEach(function(e,j){var h=cg[i+"_"+j];if(h&&h.length){bx.appendChild(el("h4",null,w.n+" · "+e.nm));bx.appendChild(el("p",null,h.slice(-6).map(function(y){return y.kg+" kg ("+dt(y.d)+")"}).join(" · ")))}})});
-if(bx.children.length==(p.obs?2:1))bx.appendChild(el("p",null,"O aluno ainda não registrou cargas."))})});
-btn("Excluir",function(){if(confirm("Excluir "+d.nome+"? Isso apaga treinos e histórico.")){ref(id).delete().then(list)}});
-c.appendChild(h);c.appendChild(ac);c.appendChild(bx);return c}
-function list(){var bx=g("adList");bx.textContent="Carregando...";
-db.collection("alunos").orderBy("criado","desc").get().then(function(q){bx.innerHTML="";if(q.empty){bx.textContent="Nenhum aluno cadastrado ainda.";return}q.forEach(function(d){bx.appendChild(card(d.id,d.data()))})}).catch(function(){bx.textContent="Não foi possível carregar os alunos."})}
-function admin(){show("adApp");g("adNew").textContent="";list()}
-g("adLink").onclick=function(){if(!db){show("trLogin");notReady("trErr");return}usr?admin():show("adLogin")};
-g("adBack").onclick=function(){show(al?"trApp":"trLogin")};
-g("adEnter").onclick=function(){if(!auth){notReady("adErr");return}g("adErr").textContent="";
-auth.signInWithEmailAndPassword(g("adMail").value.trim(),g("adPass").value).then(function(){g("adPass").value="";admin()}).catch(function(e){console.log(e.code);g("adErr").textContent=(e.code==="auth/invalid-login-credentials"||e.code==="auth/wrong-password"||e.code==="auth/user-not-found"||e.code==="auth/invalid-credential")?"E-mail ou senha incorretos.":"Erro ao entrar ("+e.code+")."})};
-g("adOut").onclick=function(){auth.signOut();show("trLogin")};
-g("adAdd").onclick=function(){var n=g("adNome").value.trim();if(!n)return;var c=gen();
-db.collection("alunos").doc(c).set({nome:n,criado:Date.now(),treinos:[],perfil:{},cargas:{}}).then(function(){g("adNome").value="";g("adNew").textContent="Aluno cadastrado! Código de "+n+": "+fc(c);list()}).catch(function(){g("adNew").textContent="Não foi possível cadastrar. Tente de novo."})};
 
 if(!db)notReady("trErr");else if(st("ap_code"))enter(st("ap_code"),true);
 })();
